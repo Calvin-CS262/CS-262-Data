@@ -8,6 +8,13 @@ DROP TABLE IF EXISTS Passenger;
 DROP TABLE IF EXISTS Ride;
 DROP TABLE IF EXISTS Users;
 
+-- Drop database if it exists
+DROP DATABASE IF EXISTS CalUber;
+
+CREATE DATABASE CalUber;
+
+USE CalUber;
+
 CREATE TABLE Users (
 	id integer PRIMARY KEY,
 	studentId varchar(5),
@@ -23,14 +30,13 @@ CREATE TABLE Ride (
 	departure text,
 	destination text,
 	day date,
-	time time,
+	time time
 	status bit
 	);
 
 CREATE TABLE Passenger (
 	rideId integer REFERENCES Ride(id),
-	passengerId integer REFERENCES Users(id),
-	passengerName text
+	passengerId integer REFERENCES Users(id)
 	);
 
 GRANT SELECT ON Users TO PUBLIC;
