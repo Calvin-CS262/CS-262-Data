@@ -43,4 +43,32 @@ GRANT SELECT ON Users TO PUBLIC;
 GRANT SELECT ON Ride TO PUBLIC;
 GRANT SELECT ON Passenger TO PUBLIC;
 
+-- Sample data
+INSERT INTO Users VALUES (1, 'lhs3', 'abc123', 'steffen', 'luke');
+INSERT INTO Users VALUES (2, 'abc1', 'abc456', 'abc', 'def');
+
+
+-- Sample queries
+SELECT * FROM Ride
+WHERE destination LIKE 'Chicago';
+
+SELECT studentId + '@students.calvin.edu'
+FROM Users;
+
+SELECT * FROM Ride
+WHERE status = 0;
+
+SELECT fName + ' ' + lName
+FROM Users;
+
+SELECT id, driver, passengerId
+FROM Ride INNER JOIN Passenger
+ON Ride.id = Passenger.rideId;
+
+
+
+
+
+
+
 
