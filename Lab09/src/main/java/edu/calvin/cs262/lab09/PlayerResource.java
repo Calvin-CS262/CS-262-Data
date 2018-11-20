@@ -20,27 +20,27 @@ import static com.google.api.server.spi.config.ApiMethod.HttpMethod.DELETE;
  * The name and version are used in the URL: https://PROJECT_ID.appspot.com/monopoly/v1/ENDPOINT.
  * The namespace specifies the Java package in which to find the API implementation.
  * The issuers specifies boilerplate security features that we won't address in this course.
- *
+ * <p>
  * You should configure the name and namespace appropriately.
  */
 @Api(
-    name = "monopoly",
-    version = "v1",
-    namespace =
-    @ApiNamespace(
-        ownerDomain = "lab09.cs262.calvin.edu",
-        ownerName = "lab09.cs262.calvin.edu",
-        packagePath = ""
-    ),
-    issuers = {
-        @ApiIssuer(
-            name = "firebase",
-            issuer = "https://securetoken.google.com/YOUR-PROJECT-ID",
-            jwksUri =
-                "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system"
-                    + ".gserviceaccount.com"
-        )
-    }
+        name = "monopoly",
+        version = "v1",
+        namespace =
+        @ApiNamespace(
+                ownerDomain = "lab09.cs262.calvin.edu",
+                ownerName = "lab09.cs262.calvin.edu",
+                packagePath = ""
+        ),
+        issuers = {
+                @ApiIssuer(
+                        name = "firebase",
+                        issuer = "https://securetoken.google.com/YOUR-PROJECT-ID",
+                        jwksUri =
+                                "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system"
+                                        + ".gserviceaccount.com"
+                )
+        }
 )
 
 /**
@@ -57,7 +57,7 @@ public class PlayerResource {
      * @return JSON-formatted list of player records (based on a root JSON tag of "items")
      * @throws SQLException
      */
-    @ApiMethod(path="players", httpMethod=GET)
+    @ApiMethod(path = "players", httpMethod = GET)
     public List<Player> getPlayers() throws SQLException {
         Connection connection = null;
         Statement statement = null;
@@ -76,7 +76,7 @@ public class PlayerResource {
                 result.add(p);
             }
         } catch (SQLException e) {
-            throw(e);
+            throw (e);
         } finally {
             resultSet.close();
             statement.close();
@@ -93,7 +93,7 @@ public class PlayerResource {
      * @return if the player exists, a JSON-formatted player record, otherwise an invalid/empty JSON entity
      * @throws SQLException
      */
-    @ApiMethod(path="player/{id}", httpMethod=GET)
+    @ApiMethod(path = "player/{id}", httpMethod = GET)
     public Player getPlayer(@Named("id") int id) throws SQLException {
         // TODO: Implement the get-player resource (Lab 9).
         return null;
@@ -113,7 +113,7 @@ public class PlayerResource {
      * @return new/updated player entity
      * @throws SQLException
      */
-    @ApiMethod(path="player/{id}", httpMethod=PUT)
+    @ApiMethod(path = "player/{id}", httpMethod = PUT)
     public Player putPlayer(Player player, @Named("id") int id) throws SQLException {
         /*
          TODO: Implement/document the put-player resource (Homework 3).
@@ -137,7 +137,7 @@ public class PlayerResource {
      * number. We do this because POST is not idempotent, meaning that running
      * the same POST several times creates multiple objects with unique IDs but
      * otherwise having the same field values.
-     *
+     * <p>
      * The method creates a new, unique ID by querying the player table for the
      * largest ID and adding 1 to that. Using a DB sequence would be a better solution.
      * This method creates an instance of Person with a new, unique ID.
@@ -146,7 +146,7 @@ public class PlayerResource {
      * @return new player entity with a system-generated ID
      * @throws SQLException
      */
-    @ApiMethod(path="player", httpMethod=POST)
+    @ApiMethod(path = "player", httpMethod = POST)
     public Player postPlayer(Player player) throws SQLException {
         /*
         TODO: Implement/document the post-player resource (Homework 3).
@@ -168,11 +168,11 @@ public class PlayerResource {
      * If the player with the given ID doesn't exist, SQL won't delete anything.
      * This makes DELETE idempotent.
      *
-     * @param id     the ID for the player, assumed to be unique
+     * @param id the ID for the player, assumed to be unique
      * @return the deleted player, if any
      * @throws SQLException
      */
-    @ApiMethod(path="player/{id}", httpMethod=DELETE)
+    @ApiMethod(path = "player/{id}", httpMethod = DELETE)
     public void deletePlayer(@Named("id") int id) throws SQLException {
         /*
         TODO: Implement/document the delete-player resource (Homework 3).
@@ -184,7 +184,9 @@ public class PlayerResource {
          */
     }
 
-    /** SQL Utility Functions *********************************************/
+    /**
+     * SQL Utility Functions
+     *********************************************/
 
     /*
      * This function gets the player with the given id using the given JDBC statement.

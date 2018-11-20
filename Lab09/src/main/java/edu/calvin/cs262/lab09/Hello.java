@@ -8,23 +8,23 @@ import com.google.api.server.spi.config.ApiNamespace;
 import static com.google.api.server.spi.config.ApiMethod.HttpMethod.GET;
 
 @Api(
-    name = "monopoly",
-    version = "v1",
-    namespace =
-    @ApiNamespace(
-        ownerDomain = "lab09.cs262.calvin.edu",
-        ownerName = "lab09.cs262.calvin.edu",
-        packagePath = ""
-    ),
-    issuers = {
-        @ApiIssuer(
-            name = "firebase",
-            issuer = "https://securetoken.google.com/YOUR-PROJECT-ID",
-            jwksUri =
-                "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system"
-                    + ".gserviceaccount.com"
-        )
-    }
+        name = "monopoly",
+        version = "v1",
+        namespace =
+        @ApiNamespace(
+                ownerDomain = "lab09.cs262.calvin.edu",
+                ownerName = "lab09.cs262.calvin.edu",
+                packagePath = ""
+        ),
+        issuers = {
+                @ApiIssuer(
+                        name = "firebase",
+                        issuer = "https://securetoken.google.com/caluber-221319:us-east4:calvin-cs262-fall2018-caluber-h",
+                        jwksUri =
+                                "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system"
+                                        + ".gserviceaccount.com"
+                )
+        }
 )
 
 /**
@@ -38,7 +38,7 @@ public class Hello {
      *
      * @return a hello-world entity in JSON format
      */
-    @ApiMethod(httpMethod=GET)
+    @ApiMethod(httpMethod = GET)
     public Player hello() {
         return new Player(-1, "Hello, endpoints!", null);
     }
