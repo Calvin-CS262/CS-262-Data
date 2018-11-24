@@ -174,7 +174,7 @@ public class UserResource {
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            user.setId(id);
+            user.setUserId(id);
             resultSet = selectUser(id, statement);
             if (resultSet.next()) {
                 updateUser(user, statement);
@@ -216,7 +216,7 @@ public class UserResource {
             statement = connection.createStatement();
             resultSet = statement.executeQuery("SELECT MAX(ID) FROM User");
             if (resultSet.next()) {
-                user.setId(resultSet.getInt(1) + 1);
+                user.setUserId(resultSet.getInt(1) + 1);
             } else {
                 throw new RuntimeException("failed to find unique ID...");
             }
@@ -287,7 +287,7 @@ public class UserResource {
                         getValueStringOrNull(user.getLastName()),
                         getValueStringOrNull(user.getFirstName()),
                         user.getEmail(),
-                        user.getId()
+                        user.getUserId()
                 )
         );
     }
@@ -298,7 +298,7 @@ public class UserResource {
     private void insertUser(User user, Statement statement) throws SQLException {
         statement.executeUpdate(
                 String.format("INSERT INTO User VALUES (%d, %s, %s, %s, %s)",
-                        user.getId(),
+                        user.getUserId(),
                         user.getPassword(),
                         getValueStringOrNull(user.getLastName()),
                         getValueStringOrNull(user.getFirstName()),

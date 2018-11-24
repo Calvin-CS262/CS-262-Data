@@ -99,11 +99,10 @@ public class RideResource {
                 Ride r = new Ride(
                         Integer.parseInt(resultSet.getString(1)),
                         Integer.parseInt(resultSet.getString(2)),
-                        resultSet.getString(3),
+                        Integer.parseInt(resultSet.getString(3)),
                         resultSet.getString(4),
-                        Integer.parseInt(resultSet.getString(5)),
+                        resultSet.getString(5),
                         resultSet.getString(6),	//Need to make sure that datetime is stored in database as a string
-                        Boolean.parseBoolean(resultSet.getString(7))
                 );
                 result.add(r);
             }
@@ -139,11 +138,10 @@ public class RideResource {
                 result = new Ride(
                         Integer.parseInt(resultSet.getString(1)),
                         Integer.parseInt(resultSet.getString(2)),
-                        resultSet.getString(3),
+                        Integer.parseInt(resultSet.getString(3)),
                         resultSet.getString(4),
-                        Integer.parseInt(resultSet.getString(5)),
-                        resultSet.getString(6),
-                        Boolean.parseBoolean(resultSet.getString(7))
+                        resultSet.getString(5),
+                        resultSet.getString(6)
                 );
             }
         } catch (SQLException e) {
@@ -178,7 +176,7 @@ public class RideResource {
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            ride.setId(id);
+            ride.setRideId(id);
             resultSet = selectRide(id, statement);
             if (resultSet.next()) {
                 updateRide(ride, statement);
@@ -220,7 +218,7 @@ public class RideResource {
             statement = connection.createStatement();
             resultSet = statement.executeQuery("SELECT MAX(ID) FROM Ride");
             if (resultSet.next()) {
-                ride.setId(resultSet.getInt(1) + 1);
+                ride.setRideId(resultSet.getInt(1) + 1);
             } else {
                 throw new RuntimeException("failed to find unique ID...");
             }

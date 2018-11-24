@@ -61,7 +61,7 @@ public class Ride {
 
     public String getDateTime() { return this.dateTime.toString(); }
 
-    public void setDateTime(String dateTime) { this.date = Instant.parse(dateTime); }
+    public void setDateTime(String dateTime) { this.dateTime = Instant.parse(dateTime); }
 
     public boolean getStatus() {
         return dateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming

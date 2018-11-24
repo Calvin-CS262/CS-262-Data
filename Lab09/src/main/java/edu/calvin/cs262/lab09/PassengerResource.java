@@ -259,7 +259,7 @@ public class PassengerResource {
      */
     private ResultSet selectPassenger(int uId, int rId, Statement statement) throws SQLException {
         return statement.executeQuery(
-                String.format("SELECT * FROM Passenger WHERE userId=%d, rideId=%d", id)
+                String.format("SELECT * FROM Passenger WHERE userId=%d, rideId=%d", uId, rId)
         );
     }
 

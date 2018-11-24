@@ -9,15 +9,15 @@ public class Passenger {
 	}
 
 	public Passenger(int trip, int person) {
-		this.user = person;
-		this.ride = trip;
+		this.userID = person;
+		this.rideID = trip;
 	}
 
 	public int getUser() {
-		return this.user;
+		return this.userID;
 	}
 
 	public int getRide() {
-		return this.ride;
+		return this.rideID;
 	}
 }
