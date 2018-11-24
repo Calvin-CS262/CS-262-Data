@@ -18,7 +18,7 @@ public class Ride {
 
     // Constructor
     public Ride(int rideId, int driverId, int passengerLimit, String  departure,
-                 String destination, String dateTime) {
+                 String destination, String dateTime, Boolean status) {
         this.rideId = rideId;
         this.driverId = driverId;
         this.departure = departure;
