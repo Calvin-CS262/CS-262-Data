@@ -97,11 +97,11 @@
                 <version>2.6</version>
                 <configuration>
                     <webResources>
-                        <resource>
+                        <resources>
                             <directory>${basedir}/src/main/webapp/WEB-INF</directory>
                             <filtering>true</filtering>
                             <targetPath>WEB-INF</targetPath>
-                        </resource>
+                        </resources>
                     </webResources>
                 </configuration>
             </plugin>
