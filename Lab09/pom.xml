@@ -143,7 +143,7 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <fork>true</fork>
-                    <executable>LAB09-YOUR-JAVAC-PATH</executable>
+                    <executable>/usr/bin/javac</executable>
                 </configuration>
             </plugin>
         </plugins>
