@@ -133,9 +133,3 @@ Note that even a disabled project costs ~$1/day. Delete the cloud
 project entirely when the course grades are submitted. You should,
 of course, keep the source code in your repo so that you can rebuild
 it later if needed.
-
-
-More help:
-- connecting to sql database: use command 
-    "gcloud sql connect calvincs262-fall2018-caluber --user=postgres --quiet"
-    in google cloud terminal. 
