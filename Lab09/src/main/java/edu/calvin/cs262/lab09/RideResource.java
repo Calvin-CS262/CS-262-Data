@@ -102,7 +102,7 @@ public class RideResource {
                         Integer.parseInt(resultSet.getString(3)),
                         resultSet.getString(4),
                         resultSet.getString(5),
-                        resultSet.getString(6),	//Need to make sure that datetime is stored in database as a string
+                        resultSet.getString(6)	//Need to make sure that datetime is stored in database as a string
                 );
                 result.add(r);
             }
