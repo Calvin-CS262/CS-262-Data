@@ -11,7 +11,7 @@ public class Ride {
     private String departure;
     private String destination;
     private int passengerLimit;
-    private LocalDateTime dateTime;
+    private Instant dateTime;
 
 
     // Constructor
