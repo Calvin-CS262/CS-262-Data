@@ -25,7 +25,7 @@ public class Ride {
         this.destination = destination;
         this.passengerLimit = passengerLimit;
         this.dateTime = Instant.parse(dateTime);
-        this.status = dateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
+        this.status = this.dateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
 
     }
 
