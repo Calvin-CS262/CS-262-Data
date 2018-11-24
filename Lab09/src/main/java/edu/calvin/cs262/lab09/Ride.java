@@ -1,5 +1,5 @@
 package edu.calvin.cs262.lab09;
-import java.lang.Object;
+import java.time.Instant;
 
 /** Ride Class
  * Sets up class for the Ride Table
