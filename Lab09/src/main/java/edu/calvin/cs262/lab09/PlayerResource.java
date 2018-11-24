@@ -15,7 +15,6 @@ import static com.google.api.server.spi.config.ApiMethod.HttpMethod.PUT;
 import static com.google.api.server.spi.config.ApiMethod.HttpMethod.POST;
 import static com.google.api.server.spi.config.ApiMethod.HttpMethod.DELETE;
 
-
 /**
  * This Java annotation specifies the general configuration of the Google Cloud endpoint API.
  * The name and version are used in the URL: https://PROJECT_ID.appspot.com/monopoly/v1/ENDPOINT.
@@ -25,8 +24,8 @@ import static com.google.api.server.spi.config.ApiMethod.HttpMethod.DELETE;
  * You should configure the name and namespace appropriately.
  */
 @Api(
-        name = "caluber",
-        version = "v2",
+        name = "monopoly",
+        version = "v1",
         namespace =
         @ApiNamespace(
                 ownerDomain = "lab09.cs262.calvin.edu",
@@ -51,7 +50,7 @@ import static com.google.api.server.spi.config.ApiMethod.HttpMethod.DELETE;
  * You can test the GET endpoints using a standard browser or cURL.
  *
  * % curl --request GET \
- *    https://caluber-221319.appspot.com/caluber/v2/rides
+ *    https://calvincs262-monopoly.appspot.com/monopoly/v1/players
  *
  * % curl --request GET \
  *    https://calvincs262-monopoly.appspot.com/monopoly/v1/player/1
@@ -76,36 +75,32 @@ import static com.google.api.server.spi.config.ApiMethod.HttpMethod.DELETE;
  *    https://calvincs262-monopoly.appspot.com/monopoly/v1/player/4
  *
  */
-public class RideResource {
+public class PlayerResource {
 
     /**
      * GET
-     * This method gets the full list of rides from the Ride table.
+     * This method gets the full list of players from the Player table.
      *
-     * @return JSON-formatted list of ride records (based on a root JSON tag of "items")
+     * @return JSON-formatted list of player records (based on a root JSON tag of "items")
      * @throws SQLException
      */
-    @ApiMethod(path="rides", httpMethod=GET)
-    public List<Ride> getRides() throws SQLException {
+    @ApiMethod(path="players", httpMethod=GET)
+    public List<Player> getPlayers() throws SQLException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        List<Ride> result = new ArrayList<Ride>();
+        List<Player> result = new ArrayList<Player>();
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            resultSet = selectRides(statement);
+            resultSet = selectPlayers(statement);
             while (resultSet.next()) {
-                Ride r = new Ride(
+                Player p = new Player(
                         Integer.parseInt(resultSet.getString(1)),
-                        Integer.parseInt(resultSet.getString(2)),
-                        Integer.parseInt(resultSet.getString(3)),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6),	//Need to make sure that datetime is stored in database as a string
-                        Boolean.parseBoolean(resultSet.getString(7))
+                        resultSet.getString(2),
+                        resultSet.getString(3)
                 );
-                result.add(r);
+                result.add(p);
             }
         } catch (SQLException e) {
             throw(e);
@@ -119,31 +114,27 @@ public class RideResource {
 
     /**
      * GET
-     * This method gets the ride from the Ride table with the given ID.
+     * This method gets the player from the Player table with the given ID.
      *
-     * @param id the ID of the requested ride
-     * @return if the ride exists, a JSON-formatted ride record, otherwise an invalid/empty JSON entity
+     * @param id the ID of the requested player
+     * @return if the player exists, a JSON-formatted player record, otherwise an invalid/empty JSON entity
      * @throws SQLException
      */
-    @ApiMethod(path="ride/{id}", httpMethod=GET)
-    public Ride getRide(@Named("id") int id) throws SQLException {
+    @ApiMethod(path="player/{id}", httpMethod=GET)
+    public Player getPlayer(@Named("id") int id) throws SQLException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        Ride result = null;
+        Player result = null;
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            resultSet = selectRide(id, statement);
+            resultSet = selectPlayer(id, statement);
             if (resultSet.next()) {
-                result = new Ride(
+                result = new Player(
                         Integer.parseInt(resultSet.getString(1)),
-                        Integer.parseInt(resultSet.getString(2)),
-                        Integer.parseInt(resultSet.getString(3)),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6),	//Need to make sure that datetime is stored in database as a string
-                        Boolean.parseBoolean(resultSet.getString(7))
+                        resultSet.getString(2),
+                        resultSet.getString(3)
                 );
             }
         } catch (SQLException e) {
@@ -159,31 +150,31 @@ public class RideResource {
     /**
      * PUT
      * This method creates/updates an instance of Person with a given ID.
-     * If the ride doesn't exist, create a new ride using the given field values.
-     * If the ride already exists, update the fields using the new ride field values.
+     * If the player doesn't exist, create a new player using the given field values.
+     * If the player already exists, update the fields using the new player field values.
      * We do this because PUT is idempotent, meaning that running the same PUT several
      * times is the same as running it exactly once.
-     * Any ride ID value set in the passed ride data is ignored.
+     * Any player ID value set in the passed player data is ignored.
      *
-     * @param id     the ID for the ride, assumed to be unique
-     * @param ride a JSON representation of the ride; The id parameter overrides any id specified here.
-     * @return new/updated ride entity
+     * @param id     the ID for the player, assumed to be unique
+     * @param player a JSON representation of the player; The id parameter overrides any id specified here.
+     * @return new/updated player entity
      * @throws SQLException
      */
-    @ApiMethod(path="ride/{id}", httpMethod=PUT)
-    public Ride putRide(Ride ride, @Named("id") int id) throws SQLException {
+    @ApiMethod(path="player/{id}", httpMethod=PUT)
+    public Player putPlayer(Player player, @Named("id") int id) throws SQLException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            ride.setRideId(id);
-            resultSet = selectRide(id, statement);
+            player.setId(id);
+            resultSet = selectPlayer(id, statement);
             if (resultSet.next()) {
-                updateRide(ride, statement);
+                updatePlayer(player, statement);
             } else {
-                insertRide(ride, statement);
+                insertPlayer(player, statement);
             }
         } catch (SQLException e) {
             throw (e);
@@ -192,7 +183,7 @@ public class RideResource {
             if (statement != null) { statement.close(); }
             if (connection != null) { connection.close(); }
         }
-        return ride;
+        return player;
     }
 
     /**
@@ -202,29 +193,29 @@ public class RideResource {
      * the same POST several times creates multiple objects with unique IDs but
      * otherwise having the same field values.
      *
-     * The method creates a new, unique ID by querying the Ride table for the
+     * The method creates a new, unique ID by querying the player table for the
      * largest ID and adding 1 to that. Using a DB sequence would be a better solution.
      * This method creates an instance of Person with a new, unique ID.
      *
-     * @param ride a JSON representation of the ride to be created
-     * @return new ride entity with a system-generated ID
+     * @param player a JSON representation of the player to be created
+     * @return new player entity with a system-generated ID
      * @throws SQLException
      */
-    @ApiMethod(path="ride", httpMethod=POST)
-    public Ride postRide(Ride ride) throws SQLException {
+    @ApiMethod(path="player", httpMethod=POST)
+    public Player postPlayer(Player player) throws SQLException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT MAX(ID) FROM Ride");
+            resultSet = statement.executeQuery("SELECT MAX(ID) FROM Player");
             if (resultSet.next()) {
-                ride.setRideId(resultSet.getInt(1) + 1);
+                player.setId(resultSet.getInt(1) + 1);
             } else {
                 throw new RuntimeException("failed to find unique ID...");
             }
-            insertRide(ride, statement);
+            insertPlayer(player, statement);
         } catch (SQLException e) {
             throw (e);
         } finally {
@@ -232,27 +223,27 @@ public class RideResource {
             if (statement != null) { statement.close(); }
             if (connection != null) { connection.close(); }
         }
-        return ride;
+        return player;
     }
 
     /**
      * DELETE
      * This method deletes the instance of Person with a given ID, if it exists.
-     * If the ride with the given ID doesn't exist, SQL won't delete anything.
+     * If the player with the given ID doesn't exist, SQL won't delete anything.
      * This makes DELETE idempotent.
      *
-     * @param id     the ID for the ride, assumed to be unique
-     * @return the deleted ride, if any
+     * @param id     the ID for the player, assumed to be unique
+     * @return the deleted player, if any
      * @throws SQLException
      */
-    @ApiMethod(path="ride/{id}", httpMethod=DELETE)
-    public void deleteRide(@Named("id") int id) throws SQLException {
+    @ApiMethod(path="player/{id}", httpMethod=DELETE)
+    public void deletePlayer(@Named("id") int id) throws SQLException {
         Connection connection = null;
         Statement statement = null;
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            deleteRide(id, statement);
+            deletePlayer(id, statement);
         } catch (SQLException e) {
             throw (e);
         } finally {
@@ -264,61 +255,55 @@ public class RideResource {
     /** SQL Utility Functions *********************************************/
 
     /*
-     * This function gets the ride with the given id using the given JDBC statement.
+     * This function gets the player with the given id using the given JDBC statement.
      */
-    private ResultSet selectRide(int id, Statement statement) throws SQLException {
+    private ResultSet selectPlayer(int id, Statement statement) throws SQLException {
         return statement.executeQuery(
-                String.format("SELECT * FROM Ride WHERE id=%d", id)
+                String.format("SELECT * FROM Player WHERE id=%d", id)
         );
     }
 
     /*
-     * This function gets the ride with the given id using the given JDBC statement.
+     * This function gets the player with the given id using the given JDBC statement.
      */
-    private ResultSet selectRides(Statement statement) throws SQLException {
+    private ResultSet selectPlayers(Statement statement) throws SQLException {
         return statement.executeQuery(
-                "SELECT * FROM Ride"
+                "SELECT * FROM Player"
         );
     }
 
     /*
-     * This function modifies the given ride using the given JDBC statement.
+     * This function modifies the given player using the given JDBC statement.
      */
-    private void updateRide(Ride ride, Statement statement) throws SQLException {
+    private void updatePlayer(Player player, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("UPDATE Ride SET driver=%d, passengerLimit=%d, departure=%s, destination=%s, departureDateTime=%s WHERE id=%d",
-                        ride.getDriver(),
-                        ride.getPassengerLimit(),
-                        ride.getDeparture(),
-                        ride.getDestination(),
-                        ride.getDateTime(),
-                        ride.getRideId()
+                String.format("UPDATE Player SET emailAddress='%s', name=%s WHERE id=%d",
+                        player.getEmailAddress(),
+                        getValueStringOrNull(player.getName()),
+                        player.getId()
                 )
         );
     }
 
     /*
-     * This function inserts the given ride using the given JDBC statement.
+     * This function inserts the given player using the given JDBC statement.
      */
-    private void insertRide(Ride ride, Statement statement) throws SQLException {
+    private void insertPlayer(Player player, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("INSERT INTO Ride VALUES (%d, %s, %s, %s, %s)",
-                        ride.getRideId(),
-                        ride.getDriver(),
-                        ride.getPassengerLimit(),
-                        ride.getDeparture(),
-                        ride.getDestination(),
-                        ride.getDateTime()
+                String.format("INSERT INTO Player VALUES (%d, '%s', %s)",
+                        player.getId(),
+                        player.getEmailAddress(),
+                        getValueStringOrNull(player.getName())
                 )
         );
     }
 
     /*
-     * This function gets the ride with the given id using the given JDBC statement.
+     * This function gets the player with the given id using the given JDBC statement.
      */
-    private void deleteRide(int id, Statement statement) throws SQLException {
+    private void deletePlayer(int id, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("DELETE FROM Ride WHERE id=%d", id)
+                String.format("DELETE FROM Player WHERE id=%d", id)
         );
     }
 

@@ -26,7 +26,7 @@ import static com.google.api.server.spi.config.ApiMethod.HttpMethod.DELETE;
  */
 @Api(
         name = "caluber",
-        version = "v1",
+        version = "v2",
         namespace =
         @ApiNamespace(
                 ownerDomain = "lab09.cs262.calvin.edu",
@@ -51,7 +51,7 @@ import static com.google.api.server.spi.config.ApiMethod.HttpMethod.DELETE;
  * You can test the GET endpoints using a standard browser or cURL.
  *
  * % curl --request GET \
- *    https://caluber-221319.appspot.com/caluber/v1/passenger
+ *    https://caluber-221319.appspot.com/caluber/v2/passenger
  *
  * % curl --request GET \
  *    https://calvincs262-monopoly.appspot.com/monopoly/v1/player/1

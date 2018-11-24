@@ -29,7 +29,8 @@ CREATE TABLE Ride (
 	passengerLimit integer,
 	departure text,
 	destination text,
-	departureDateTime text
+	departureDateTime text,
+	status text
 	);
 
 CREATE TABLE Passenger (
@@ -54,7 +55,7 @@ SELECT CONCAT (studentId, '@students.calvin.edu')
 FROM "User";
 
 SELECT * FROM Ride
-WHERE status = 0;	--0 means upcoming ride, 1 means past ride
+WHERE status = 'false';	--false means upcoming ride, true means past ride
 
 SELECT CONCAT (fName, ' ', lName)
 FROM "User";
