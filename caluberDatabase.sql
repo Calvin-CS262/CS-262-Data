@@ -9,9 +9,9 @@ DROP TABLE IF EXISTS Ride;
 DROP TABLE IF EXISTS "User";
 
 -- Drop database if it exists
-DROP DATABASE IF EXISTS CalUber;
+-- DROP DATABASE IF EXISTS CalUber;
 
-CREATE DATABASE CalUber;
+-- CREATE DATABASE CalUber;
 
 -- USE CalUber;
 
