@@ -25,7 +25,7 @@
 
         <INSTANCE_CONNECTION_NAME>caluber-221319:us-east4:calvin-cs262-fall2018-caluber-h</INSTANCE_CONNECTION_NAME>
         <user>postgres</user>
-        <password>$!3qc[8vesP3#eNh</password>
+        <password>a7hzJW7StYTsev5j</password>
         <database>postgres</database>
 
         <maven.compiler.target>1.8</maven.compiler.target>
