@@ -35,7 +35,7 @@ import static com.google.api.server.spi.config.ApiMethod.HttpMethod.DELETE;
         issuers = {
                 @ApiIssuer(
                         name = "firebase",
-                        issuer = "https://securetoken.google.com/YOUR-PROJECT-ID",
+                        issuer = "https://securetoken.google.com/caluber-221319:us-east4:calvin-cs262-fall2018-caluber-h",
                         jwksUri =
                                 "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system"
                                         + ".gserviceaccount.com"
