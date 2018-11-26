@@ -143,7 +143,7 @@ public class RideResource {
                         resultSet.getString(4),
                         resultSet.getString(5),
                         resultSet.getString(6),	//Need to make sure that datetime is stored in database as a string
-                        Boolean.parseBoolean(resultSet.getString(7))
+                        resultSet.getString(7)
                 );
             }
         } catch (SQLException e) {
@@ -286,12 +286,13 @@ public class RideResource {
      */
     private void updateRide(Ride ride, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("UPDATE Ride SET driverId=%d, departure='%s', destination='%s', passengerLimit=%d, departureDateTime='%s' WHERE rideId=%d",
+                String.format("UPDATE Ride SET driverId=%d, departure='%s', destination='%s', passengerLimit=%d, departureDateTime='%s', status = '%s' WHERE rideId=%d",
                         ride.getDriver(),
                         ride.getDeparture(),
                         ride.getDestination(),
                         ride.getPassengerLimit(),
                         ride.getDateTime(),
+                        ride.getStatus()
                         ride.getRideId()
                 )
         );
@@ -302,13 +303,14 @@ public class RideResource {
      */
     private void insertRide(Ride ride, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("INSERT INTO Ride VALUES (%d, %d, '%s', '%s', %d, '%s')",
+                String.format("INSERT INTO Ride VALUES (%d, %d, '%s', '%s', %d, '%s', '%s')",
                         ride.getRideId(),
                         ride.getDriver(),
                         ride.getDeparture(),
                         ride.getDestination(),
                         ride.getPassengerLimit(),
-                        ride.getDateTime()
+                        ride.getDateTime(),
+                        ride.getStatus()
                 )
         );
     }
