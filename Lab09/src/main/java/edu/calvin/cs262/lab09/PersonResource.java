@@ -287,7 +287,7 @@ public class PersonResource {
                         getValueStringOrNull(person.getLastName()),
                         getValueStringOrNull(person.getFirstName()),
                         person.getEmail(),
-                        person.getUersonId()
+                        person.getPersonId()
                 )
         );
     }
@@ -298,7 +298,7 @@ public class PersonResource {
     private void insertPerson(Person person, Statement statement) throws SQLException {
         statement.executeUpdate(
                 String.format("INSERT INTO Person VALUES (%d, %s, %s, %s, %s)",
-                        person.getUersonId(),
+                        person.getPersonId(),
                         person.getPassword(),
                         getValueStringOrNull(person.getLastName()),
                         getValueStringOrNull(person.getFirstName()),
