@@ -268,7 +268,7 @@ public class RideResource {
      */
     private ResultSet selectRide(int id, Statement statement) throws SQLException {
         return statement.executeQuery(
-                String.format("SELECT * FROM Ride WHERE id=%d", id)
+                String.format("SELECT * FROM Ride WHERE rideId=%d", id)
         );
     }
 
@@ -286,7 +286,7 @@ public class RideResource {
      */
     private void updateRide(Ride ride, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("UPDATE Ride SET driverId=%d, passengerLimit=%d, departure='%s', destination='%s', departureDateTime='%s' WHERE rideId=%d",
+                String.format("UPDATE Ride SET driverId=%d, departure='%s', destination='%s', passengerLimit=%d, departureDateTime='%s' WHERE rideId=%d",
                         ride.getDriver(),
                         ride.getDeparture(),
                         ride.getDestination(),
@@ -302,7 +302,7 @@ public class RideResource {
      */
     private void insertRide(Ride ride, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("INSERT INTO Ride VALUES (%d, '%s', '%s', '%s', '%s')",
+                String.format("INSERT INTO Ride VALUES (%d, %d, '%s', '%s', %d, '%s')",
                         ride.getRideId(),
                         ride.getDriver(),
                         ride.getDeparture(),
@@ -318,20 +318,8 @@ public class RideResource {
      */
     private void deleteRide(int id, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("DELETE FROM Ride WHERE id=%d", id)
+                String.format("DELETE FROM Ride WHERE rideId=%d", id)
         );
-    }
-
-    /*
-     * This function returns a value literal suitable for an SQL INSERT/UPDATE command.
-     * If the value is NULL, it returns an unquoted NULL, otherwise it returns the quoted value.
-     */
-    private String getValueStringOrNull(String value) {
-        if (value == null) {
-            return "NULL";
-        } else {
-            return "'" + value + "'";
-        }
     }
 
 }
