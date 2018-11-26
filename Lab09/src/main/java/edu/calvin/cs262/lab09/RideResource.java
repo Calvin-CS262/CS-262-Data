@@ -218,7 +218,7 @@ public class RideResource {
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT MAX(ID) FROM Ride");
+            resultSet = statement.executeQuery("SELECT MAX(rideId) FROM Ride");
             if (resultSet.next()) {
                 ride.setRideId(resultSet.getInt(1) + 1);
             } else {
