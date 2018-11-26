@@ -213,7 +213,7 @@ public class PassengerResource {
             statement = connection.createStatement();
             resultSet = statement.executeQuery("SELECT MAX(ID) FROM Passenger");
             if (resultSet.next()) {
-                passenger.setId(resultSet.getInt(1) + 1);
+                passenger.setID(resultSet.getInt(1) + 1);
             } else {
                 throw new RuntimeException("failed to find unique ID...");
             }

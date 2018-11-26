@@ -19,6 +19,10 @@ public class Passenger {
 		return this.id;
 	}
 
+	public void setID(int id) {
+		this.id = id;
+	}
+
 	public int getUser() {
 		return this.userID;
 	}
