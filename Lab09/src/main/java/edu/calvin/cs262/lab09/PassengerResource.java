@@ -130,7 +130,7 @@ public class PassengerResource {
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            resultSet = selectPerson(id, statement);
+            resultSet = selectPassenger(id, statement);
             if (resultSet.next()) {
                 result = new Passenger(
                         Integer.parseInt(resultSet.getString(1)),
@@ -207,7 +207,7 @@ public class PassengerResource {
     public Passenger postPassenger(Passenger passenger) throws SQLException {
         Connection connection = null;
         Statement statement = null;
-        // ResultSet resultSet = null;
+        ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
