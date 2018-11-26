@@ -49,8 +49,8 @@ INSERT INTO Person VALUES (2, 'abc1', 'abc456', 'def', 'abc');
 INSERT INTO Person VALUES (3, 'neg6', 'abc789', 'Gamble', 'Nate');
 INSERT INTO Ride VALUES (1, 1, 4, 'Calvin College', 'Denmark', '2018-11-30T10:00:00Z', 'false');
 INSERT INTO Ride VALUES (2, 2, 4, 'Calvin College', 'Chicago', '2018-10-30T15:00:00Z', 'true');
-INSERT INTO Passenger VALUES (2, 1);
-INSERT INTO Passenger VALUES (2, 3);
+INSERT INTO Passenger VALUES (1, 2, 1);
+INSERT INTO Passenger VALUES (2, 2, 3);
 
 
 -- Sample queries
@@ -66,7 +66,7 @@ WHERE status = 'false';	--false means upcoming ride, true means past ride
 SELECT CONCAT (fName, ' ', lName)
 FROM Person;
 
-SELECT id, driver, passengerId
+SELECT Ride.id, driver, passengerId
 FROM Ride INNER JOIN Passenger
 ON Ride.id = Passenger.rideId;
 
