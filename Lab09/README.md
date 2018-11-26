@@ -135,7 +135,11 @@ of course, keep the source code in your repo so that you can rebuild
 it later if needed.
 
 
-More help:
-- connecting to sql database: use command 
-    "gcloud sql connect calvincs262-fall2018-caluber --user=postgres --quiet"
-    in google cloud terminal. 
+Helpful commands for deploying the database:
+-mvn clean package
+-mvn endpoints-framework:openApiDocs
+-gcloud endpoints services deploy target/openapi-docs/openapi.json
+-mvn appengine:deploy
+-wait about a minute
+Connecting to psql database:
+-gcloud sql connect calvincs262-fall2018-caluber --user=postgres --quiet

@@ -8,23 +8,23 @@ import com.google.api.server.spi.config.ApiNamespace;
 import static com.google.api.server.spi.config.ApiMethod.HttpMethod.GET;
 
 @Api(
-        name = "monopoly",
-        version = "v1",
-        namespace =
-        @ApiNamespace(
-                ownerDomain = "lab09.cs262.calvin.edu",
-                ownerName = "lab09.cs262.calvin.edu",
-                packagePath = ""
-        ),
-        issuers = {
-                @ApiIssuer(
-                        name = "firebase",
-                        issuer = "https://securetoken.google.com/caluber-221319:us-east4:calvincs262-fall2018-caluber",
-                        jwksUri =
-                                "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system"
-                                        + ".gserviceaccount.com"
-                )
-        }
+    name = "caluber",
+    version = "v1",
+    namespace =
+    @ApiNamespace(
+        ownerDomain = "lab09.cs262.calvin.edu",
+        ownerName = "lab09.cs262.calvin.edu",
+        packagePath = ""
+    ),
+    issuers = {
+        @ApiIssuer(
+            name = "firebase",
+            issuer = "https://securetoken.google.com/YOUR-PROJECT-ID",
+            jwksUri =
+                "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system"
+                    + ".gserviceaccount.com"
+        )
+    }
 )
 
 /**
@@ -34,13 +34,15 @@ public class Hello {
 
     /**
      * This method returns a simple hello-world message.
-     * N.b., a Google Endpoint must return an entity (not, e.g., a String).
+     *
+     * N.b., a Google Endpoint must return an entity (not, e.g., a String), so the method
+     * returns a "hello" person object.
      *
      * @return a hello-world entity in JSON format
      */
-    @ApiMethod(httpMethod = GET)
-    public Player hello() {
-        return new Player(-1, "Hello, endpoints!", null);
+    @ApiMethod(httpMethod=GET)
+    public Person hello() {
+        return new Person(-1, "Hello, endpoints!", "Nothing", "to", "see");
     }
 
 }
