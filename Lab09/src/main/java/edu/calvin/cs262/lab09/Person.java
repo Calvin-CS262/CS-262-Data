@@ -27,22 +27,22 @@ public class Person {
 
     public int getPersonId() { return personId; }
 
-    public void setPersonId(int newPersonId) {this.personId = newPersonId;}
+    public void setPersonId(int personId) {this.personId = personId;}
 
     public String getPassword() { return password; }
 
-    public void setPassword(String newPassword) { this.password = newPassword; }
+    public void setPassword(String password) { this.password = password; }
 
     public String getLastName() { return lastName; }
 
-    public void setLastName(String newLastName) { this.lastName = newLastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
 
     public String getFirstName() { return firstName; }
 
-    public void setFirstName(String newFirstName) { this.firstName = newFirstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
     public String getEmail() { return email; }
 
-    public void setEmail(String newEmail) { this.email = newEmail + "@students.calvin.edu"; }
+    public void setEmail(String email) { this.email = email + "@students.calvin.edu"; }
 
 }
