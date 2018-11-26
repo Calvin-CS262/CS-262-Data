@@ -34,6 +34,7 @@ CREATE TABLE Ride (
 	);
 
 CREATE TABLE Passenger (
+	id integer PRIMARY KEY,
 	rideId integer REFERENCES Ride(id),
 	passengerId integer REFERENCES Person(id)
 	);

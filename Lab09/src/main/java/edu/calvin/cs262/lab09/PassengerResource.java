@@ -120,8 +120,8 @@ public class PassengerResource {
      * @return if the passenger exists, a JSON-formatted passenger record, otherwise an invalid/empty JSON entity
      * @throws SQLException
      */
-    @ApiMethod(path="passenger/{rideId}/{userId}", httpMethod=GET)
-    public Passenger getPassenger(@Named("userId") int uId, @Named("rideId") int rId) throws SQLException {
+    @ApiMethod(path="passenger/{id}", httpMethod=GET)
+    public Passenger getPassenger(@Named("id") int id) throws SQLException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -129,11 +129,12 @@ public class PassengerResource {
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            resultSet = selectPassenger(uId, rId, statement);
+            resultSet = selectPerson(id, statement);
             if (resultSet.next()) {
                 result = new Passenger(
                         Integer.parseInt(resultSet.getString(1)),
-                        Integer.parseInt(resultSet.getString(2))
+                        Integer.parseInt(resultSet.getString(2)),
+                        Integer.parseInt(resultSet.getString(3))
                 );
             }
         } catch (SQLException e) {
@@ -209,12 +210,12 @@ public class PassengerResource {
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            // resultSet = statement.executeQuery("SELECT MAX(ID) FROM Passenger");
-            // if (resultSet.next()) {
-            //     passenger.setId(resultSet.getInt(1) + 1);
-            // } else {
-            //     throw new RuntimeException("failed to find unique ID...");
-            // }
+            resultSet = statement.executeQuery("SELECT MAX(ID) FROM Passenger");
+            if (resultSet.next()) {
+                passenger.setId(resultSet.getInt(1) + 1);
+            } else {
+                throw new RuntimeException("failed to find unique ID...");
+            }
             insertPassenger(passenger, statement);
         } catch (SQLException e) {
             throw (e);
@@ -236,14 +237,14 @@ public class PassengerResource {
      * @return the deleted passenger, if any
      * @throws SQLException
      */
-    @ApiMethod(path="passenger/{rideId}/{userId}", httpMethod=DELETE)
-    public void deletePassenger(@Named("userId") int uId, @Named("rideId") int rId) throws SQLException {
+    @ApiMethod(path="passenger/{id}", httpMethod=DELETE)
+    public void deletePassenger(@Named("id") int id) throws SQLException {
         Connection connection = null;
         Statement statement = null;
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            deletePassenger(uId, rId, statement);
+            deletePassenger(id, statement);
         } catch (SQLException e) {
             throw (e);
         } finally {
