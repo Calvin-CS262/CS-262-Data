@@ -133,3 +133,11 @@ Note that even a disabled project costs ~$1/day. Delete the cloud
 project entirely when the course grades are submitted. You should,
 of course, keep the source code in your repo so that you can rebuild
 it later if needed.
+
+
+Helpful commands for deploying the database:
+-mvn clean package
+-mvn endpoints-framework:openApiDocs
+-gcloud endpoints services deploy target/openapi-docs/openapi.json
+-mvn appengine:deploy
+-wait 15ish seconds
