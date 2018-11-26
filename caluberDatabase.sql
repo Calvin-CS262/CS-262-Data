@@ -18,26 +18,26 @@ DROP TABLE IF EXISTS Person;
 
 CREATE TABLE Person (
 	id integer PRIMARY KEY,
-	studentId varchar(5),
+	email varchar(5),
 	password varchar(50),
-	lName text,
-	fName text
+	lastName text,
+	firstName text
 	);
 
 CREATE TABLE Ride (
-	id integer PRIMARY KEY,
-	driver integer REFERENCES Person(id),
-	passengerLimit integer,
+	rideId integer PRIMARY KEY,
+	driverId integer REFERENCES Person(id),
 	departure text,
 	destination text,
+	passengerLimit integer,
 	departureDateTime text,
 	status text	--false means upcoming ride, true means past ride
 	);
 
 CREATE TABLE Passenger (
 	id integer PRIMARY KEY,
-	rideId integer REFERENCES Ride(id),
-	passengerId integer REFERENCES Person(id)
+	personId integer REFERENCES Person(id),
+	rideId integer REFERENCES Ride(id)
 	);
 
 GRANT SELECT ON Person TO PUBLIC;
