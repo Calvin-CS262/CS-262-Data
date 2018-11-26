@@ -26,8 +26,8 @@ public class Ride {
         this.departure = departure;
         this.destination = destination;
         this.passengerLimit = passengerLimit;
-        this.dateTime = Instant.parse(dateTime);
-        this.status = this.dateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
+        this.departureDateTime = Instant.parse(dateTime);
+        this.status = this.departureDateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
 
     }
 
@@ -63,12 +63,12 @@ public class Ride {
         this.passengerLimit = passengerLimit;
     }
 
-    public String getDateTime() { return this.dateTime.toString(); }
+    public String getDateTime() { return this.departureDateTime.toString(); }
 
-    public void setDateTime(String dateTime) { this.dateTime = Instant.parse(dateTime); }
+    public void setDateTime(String dateTime) { this.departureDateTime = Instant.parse(dateTime); }
 
     public boolean getStatus() {
-        this.status = dateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
+        this.status = departureDateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
         return status;
     }
     
