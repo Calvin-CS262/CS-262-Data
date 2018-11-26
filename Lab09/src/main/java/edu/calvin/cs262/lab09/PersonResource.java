@@ -324,7 +324,7 @@ public class PersonResource {
         if (value == null) {
             return "NULL";
         } else {
-            return "'" + value + "'";
+            return value;
         }
     }
 
