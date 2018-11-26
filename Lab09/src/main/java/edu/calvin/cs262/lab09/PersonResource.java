@@ -284,7 +284,7 @@ public class PersonResource {
         statement.executeUpdate(
                 String.format("UPDATE Person SET email='%s', password='%s', lastName='%s', firstName='%s' WHERE personId=%d",
                         person.getEmail(),
-                        person.getPassword(),
+                        getValueNotNull(person.getPassword()),
                         getValueStringOrNull(person.getLastName()),
                         getValueStringOrNull(person.getFirstName()),
                         person.getPersonId()
@@ -328,4 +328,16 @@ public class PersonResource {
         }
     }
 
+    /*
+     * This function returns a value literal suitable for an SQL INSERT/UPDATE command.
+     * If the value is NULL, it returns an unquoted NULL, otherwise it returns the quoted value.
+     */
+    private String getValueNotNull(String value) {
+        if (value != null) 
+        {
+            return "'" + value + "'";
+        } else { 
+            throw IllegalArgumentException;
+        }
+    }
 }

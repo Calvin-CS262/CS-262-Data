@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS Person;
 
 CREATE TABLE Person (
 	id integer PRIMARY KEY,
-	email varchar(5),
+	email varchar(30),
 	password varchar(50),
 	lastName text,
 	firstName text
@@ -78,3 +78,4 @@ ON Ride.rideId = Passenger.rideId;
 
 -- curl --request POST --header "Content-Type: application/json" \
 -- --data '{"passengerId":"3","rideId":"1"}' https://caluber-221319.appspot.com/caluber/v1/passenger
+--curl --request POST --header "Content-Type: application/json" --data '{}' https://caluber-221319.appspot.com/caluber/v1/person
