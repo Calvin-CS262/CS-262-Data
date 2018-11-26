@@ -12,7 +12,7 @@ public class Ride {
     private String departure;
     private String destination;
     private int passengerLimit;
-    private Instant dateTime;
+    private Instant departureDateTime;
     private Boolean status;
 
     public Ride() {
