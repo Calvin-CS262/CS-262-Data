@@ -99,9 +99,9 @@ public class RideResource {
                 Ride r = new Ride(
                         Integer.parseInt(resultSet.getString(1)),
                         Integer.parseInt(resultSet.getString(2)),
-                        Integer.parseInt(resultSet.getString(3)),
+                        resultSet.getString(3),
                         resultSet.getString(4),
-                        resultSet.getString(5),
+                        Integer.parseInt(resultSet.getString(5)),
                         resultSet.getString(6),	//Need to make sure that datetime is stored in database as a string
                         Boolean.parseBoolean(resultSet.getString(7))
                 );
