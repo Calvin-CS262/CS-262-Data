@@ -41,8 +41,8 @@ public class Hello {
      * @return a hello-world entity in JSON format
      */
     @ApiMethod(httpMethod=GET)
-    public User hello() {
-        return new User(-1, "Hello, endpoints!", "Nothing", "to", "see");
+    public Person hello() {
+        return new Person(-1, "Hello, endpoints!", "Nothing", "to", "see");
     }
 
 }
