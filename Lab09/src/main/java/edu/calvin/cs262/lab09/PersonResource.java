@@ -51,7 +51,7 @@ import static com.google.api.server.spi.config.ApiMethod.HttpMethod.DELETE;
  * You can test the GET endpoints using a standard browser or cURL.
  *
  * % curl --request GET \
- *    https://caluber-221319.appspot.com/caluber/v2/users
+ *    https://caluber-221319.appspot.com/caluber/v2/persons
  *
  * % curl --request GET \
  *    https://calvincs262-monopoly.appspot.com/monopoly/v1/player/1
@@ -76,34 +76,34 @@ import static com.google.api.server.spi.config.ApiMethod.HttpMethod.DELETE;
  *    https://calvincs262-monopoly.appspot.com/monopoly/v1/player/4
  *
  */
-public class UserResource {
+public class PersonResource {
 
     /**
      * GET
-     * This method gets the full list of users from the User table.
+     * This method gets the full list of persons from the Person table.
      *
-     * @return JSON-formatted list of user records (based on a root JSON tag of "items")
+     * @return JSON-formatted list of person records (based on a root JSON tag of "items")
      * @throws SQLException
      */
-    @ApiMethod(path="users", httpMethod=GET)
-    public List<User> getUsers() throws SQLException {
+    @ApiMethod(path="persons", httpMethod=GET)
+    public List<Person> getPersons() throws SQLException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        List<User> result = new ArrayList<User>();
+        List<Person> result = new ArrayList<Person>();
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            resultSet = selectUsers(statement);
+            resultSet = selectUersons(statement);
             while (resultSet.next()) {
-                User u = new User(
+                Person p = new Person(
                         Integer.parseInt(resultSet.getString(1)),
                         resultSet.getString(2),
                         resultSet.getString(3),
                         resultSet.getString(4),
                         resultSet.getString(5)
                 );
-                result.add(u);
+                result.add(p);
             }
         } catch (SQLException e) {
             throw(e);
@@ -117,24 +117,24 @@ public class UserResource {
 
     /**
      * GET
-     * This method gets the user from the User table with the given ID.
+     * This method gets the person from the Person table with the given ID.
      *
-     * @param id the ID of the requested user
-     * @return if the user exists, a JSON-formatted user record, otherwise an invalid/empty JSON entity
+     * @param id the ID of the requested person
+     * @return if the person exists, a JSON-formatted person record, otherwise an invalid/empty JSON entity
      * @throws SQLException
      */
-    @ApiMethod(path="user/{id}", httpMethod=GET)
-    public User getUser(@Named("id") int id) throws SQLException {
+    @ApiMethod(path="person/{id}", httpMethod=GET)
+    public Person getPerson(@Named("id") int id) throws SQLException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        User result = null;
+        Person result = null;
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            resultSet = selectUser(id, statement);
+            resultSet = selectUerson(id, statement);
             if (resultSet.next()) {
-                result = new User(
+                result = new Person(
                         Integer.parseInt(resultSet.getString(1)),
                         resultSet.getString(2),
                         resultSet.getString(3),
@@ -155,31 +155,31 @@ public class UserResource {
     /**
      * PUT
      * This method creates/updates an instance of Person with a given ID.
-     * If the user doesn't exist, create a new user using the given field values.
-     * If the user already exists, update the fields using the new user field values.
+     * If the person doesn't exist, create a new person using the given field values.
+     * If the person already exists, update the fields using the new person field values.
      * We do this because PUT is idempotent, meaning that running the same PUT several
      * times is the same as running it exactly once.
-     * Any user ID value set in the passed user data is ignored.
+     * Any person ID value set in the passed person data is ignored.
      *
-     * @param id     the ID for the user, assumed to be unique
-     * @param user a JSON representation of the user; The id parameter overrides any id specified here.
-     * @return new/updated user entity
+     * @param id     the ID for the person, assumed to be unique
+     * @param person a JSON representation of the person; The id parameter overrides any id specified here.
+     * @return new/updated person entity
      * @throws SQLException
      */
-    @ApiMethod(path="user/{id}", httpMethod=PUT)
-    public User putUser(User user, @Named("id") int id) throws SQLException {
+    @ApiMethod(path="person/{id}", httpMethod=PUT)
+    public Person putPerson(Person person, @Named("id") int id) throws SQLException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            user.setUserId(id);
-            resultSet = selectUser(id, statement);
+            person.setUersonId(id);
+            resultSet = selectUerson(id, statement);
             if (resultSet.next()) {
-                updateUser(user, statement);
+                updateUerson(person, statement);
             } else {
-                insertUser(user, statement);
+                insertUerson(person, statement);
             }
         } catch (SQLException e) {
             throw (e);
@@ -188,7 +188,7 @@ public class UserResource {
             if (statement != null) { statement.close(); }
             if (connection != null) { connection.close(); }
         }
-        return user;
+        return person;
     }
 
     /**
@@ -198,29 +198,29 @@ public class UserResource {
      * the same POST several times creates multiple objects with unique IDs but
      * otherwise having the same field values.
      *
-     * The method creates a new, unique ID by querying the user table for the
+     * The method creates a new, unique ID by querying the person table for the
      * largest ID and adding 1 to that. Using a DB sequence would be a better solution.
      * This method creates an instance of Person with a new, unique ID.
      *
-     * @param user a JSON representation of the user to be created
-     * @return new user entity with a system-generated ID
+     * @param person a JSON representation of the person to be created
+     * @return new person entity with a system-generated ID
      * @throws SQLException
      */
-    @ApiMethod(path="user", httpMethod=POST)
-    public User postUser(User user) throws SQLException {
+    @ApiMethod(path="person", httpMethod=POST)
+    public Person postPerson(Person person) throws SQLException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT MAX(ID) FROM User");
+            resultSet = statement.executeQuery("SELECT MAX(ID) FROM Uerson");
             if (resultSet.next()) {
-                user.setUserId(resultSet.getInt(1) + 1);
+                person.setUersonId(resultSet.getInt(1) + 1);
             } else {
                 throw new RuntimeException("failed to find unique ID...");
             }
-            insertUser(user, statement);
+            insertUerson(person, statement);
         } catch (SQLException e) {
             throw (e);
         } finally {
@@ -228,27 +228,27 @@ public class UserResource {
             if (statement != null) { statement.close(); }
             if (connection != null) { connection.close(); }
         }
-        return user;
+        return person;
     }
 
     /**
      * DELETE
      * This method deletes the instance of Person with a given ID, if it exists.
-     * If the user with the given ID doesn't exist, SQL won't delete anything.
+     * If the person with the given ID doesn't exist, SQL won't delete anything.
      * This makes DELETE idempotent.
      *
-     * @param id     the ID for the user, assumed to be unique
-     * @return the deleted user, if any
+     * @param id     the ID for the person, assumed to be unique
+     * @return the deleted person, if any
      * @throws SQLException
      */
-    @ApiMethod(path="user/{id}", httpMethod=DELETE)
-    public void deleteUser(@Named("id") int id) throws SQLException {
+    @ApiMethod(path="person/{id}", httpMethod=DELETE)
+    public void deletePerson(@Named("id") int id) throws SQLException {
         Connection connection = null;
         Statement statement = null;
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            deleteUser(id, statement);
+            deleteUerson(id, statement);
         } catch (SQLException e) {
             throw (e);
         } finally {
@@ -260,59 +260,59 @@ public class UserResource {
     /** SQL Utility Functions *********************************************/
 
     /*
-     * This function gets the user with the given id using the given JDBC statement.
+     * This function gets the person with the given id using the given JDBC statement.
      */
-    private ResultSet selectUser(int id, Statement statement) throws SQLException {
+    private ResultSet selectPerson(int id, Statement statement) throws SQLException {
         return statement.executeQuery(
-                String.format("SELECT * FROM User WHERE id=%d", id)
+                String.format("SELECT * FROM Person WHERE id=%d", id)
         );
     }
 
     /*
-     * This function gets the user with the given id using the given JDBC statement.
+     * This function gets the person with the given id using the given JDBC statement.
      */
-    private ResultSet selectUsers(Statement statement) throws SQLException {
+    private ResultSet selectPersons(Statement statement) throws SQLException {
         return statement.executeQuery(
-                "SELECT * FROM User"
+                "SELECT * FROM Person"
         );
     }
 
     /*
-     * This function modifies the given user using the given JDBC statement.
+     * This function modifies the given person using the given JDBC statement.
      */
-    private void updateUser(User user, Statement statement) throws SQLException {
+    private void updatePerson(Person person, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("UPDATE User SET password=%s, lastName=%s, firstName=%s, email=%s WHERE id=%d",
-                        user.getPassword(),
-                        getValueStringOrNull(user.getLastName()),
-                        getValueStringOrNull(user.getFirstName()),
-                        user.getEmail(),
-                        user.getUserId()
+                String.format("UPDATE Person SET password=%s, lastName=%s, firstName=%s, email=%s WHERE id=%d",
+                        person.getPassword(),
+                        getValueStringOrNull(person.getLastName()),
+                        getValueStringOrNull(person.getFirstName()),
+                        person.getEmail(),
+                        person.getUersonId()
                 )
         );
     }
 
     /*
-     * This function inserts the given user using the given JDBC statement.
+     * This function inserts the given person using the given JDBC statement.
      */
-    private void insertUser(User user, Statement statement) throws SQLException {
+    private void insertPerson(Person person, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("INSERT INTO User VALUES (%d, %s, %s, %s, %s)",
-                        user.getUserId(),
-                        user.getPassword(),
-                        getValueStringOrNull(user.getLastName()),
-                        getValueStringOrNull(user.getFirstName()),
-                        user.getEmail()
+                String.format("INSERT INTO Person VALUES (%d, %s, %s, %s, %s)",
+                        person.getUersonId(),
+                        person.getPassword(),
+                        getValueStringOrNull(person.getLastName()),
+                        getValueStringOrNull(person.getFirstName()),
+                        person.getEmail()
                 )
         );
     }
 
     /*
-     * This function gets the user with the given id using the given JDBC statement.
+     * This function gets the person with the given id using the given JDBC statement.
      */
-    private void deleteUser(int id, Statement statement) throws SQLException {
+    private void deletePerson(int id, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("DELETE FROM User WHERE id=%d", id)
+                String.format("DELETE FROM Person WHERE id=%d", id)
         );
     }
 

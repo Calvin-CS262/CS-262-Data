@@ -140,4 +140,6 @@ Helpful commands for deploying the database:
 -mvn endpoints-framework:openApiDocs
 -gcloud endpoints services deploy target/openapi-docs/openapi.json
 -mvn appengine:deploy
--wait 15ish seconds
+-wait about a minute
+Connecting to psql database:
+-gcloud sql connect calvincs262-fall2018-caluber --user=postgres --quiet

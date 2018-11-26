@@ -6,7 +6,7 @@
 -- Drop tables if they exist
 DROP TABLE IF EXISTS Passenger;
 DROP TABLE IF EXISTS Ride;
-DROP TABLE IF EXISTS "User";
+DROP TABLE IF EXISTS Person;
 
 -- Drop database if it exists
 -- DROP DATABASE IF EXISTS CalUber;
@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS "User";
 
 -- USE CalUber;
 
-CREATE TABLE "User" (
+CREATE TABLE Person (
 	id integer PRIMARY KEY,
 	studentId varchar(5),
 	password varchar(50),
@@ -25,7 +25,7 @@ CREATE TABLE "User" (
 
 CREATE TABLE Ride (
 	id integer PRIMARY KEY,
-	driver integer REFERENCES "User"(id),
+	driver integer REFERENCES Person(id),
 	passengerLimit integer,
 	departure text,
 	destination text,
@@ -35,19 +35,19 @@ CREATE TABLE Ride (
 
 CREATE TABLE Passenger (
 	rideId integer REFERENCES Ride(id),
-	passengerId integer REFERENCES "User"(id)
+	passengerId integer REFERENCES Person(id)
 	);
 
-GRANT SELECT ON "User" TO PUBLIC;
+GRANT SELECT ON Person TO PUBLIC;
 GRANT SELECT ON Ride TO PUBLIC;
 GRANT SELECT ON Passenger TO PUBLIC;
 
 -- Sample data
-INSERT INTO "User" VALUES (1, 'lhs3', 'abc123', 'steffen', 'luke');
-INSERT INTO "User" VALUES (2, 'abc1', 'abc456', 'def', 'abc');
-INSERT INTO "User" VALUES (3, 'neg6', 'abc789', 'Gamble', 'Nate');
-INSERT INTO Ride VALUES (1, 1, 4, 'Calvin College', 'Denmark', '2018-11-30 12:00:00PM', 'false');
-INSERT INTO Ride VALUES (2, 2, 4, 'Calvin College', 'Chicago', '2018-10-30 12:00:00PM', 'true');
+INSERT INTO Person VALUES (1, 'lhs3', 'abc123', 'steffen', 'luke');
+INSERT INTO Person VALUES (2, 'abc1', 'abc456', 'def', 'abc');
+INSERT INTO Person VALUES (3, 'neg6', 'abc789', 'Gamble', 'Nate');
+INSERT INTO Ride VALUES (1, 1, 4, 'Calvin College', 'Denmark', '2018-11-30T10:00:00Z', 'false');
+INSERT INTO Ride VALUES (2, 2, 4, 'Calvin College', 'Chicago', '2018-10-30T15:00:00Z', 'true');
 INSERT INTO Passenger VALUES (2, 1);
 INSERT INTO Passenger VALUES (2, 3);
 
@@ -57,13 +57,13 @@ SELECT * FROM Ride
 WHERE destination LIKE 'Chicago';
 
 SELECT CONCAT (studentId, '@students.calvin.edu')
-FROM "User";
+FROM Person;
 
 SELECT * FROM Ride
 WHERE status = 'false';	--false means upcoming ride, true means past ride
 
 SELECT CONCAT (fName, ' ', lName)
-FROM "User";
+FROM Person;
 
 SELECT id, driver, passengerId
 FROM Ride INNER JOIN Passenger

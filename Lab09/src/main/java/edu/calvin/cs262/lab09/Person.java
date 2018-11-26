@@ -1,19 +1,19 @@
 package edu.calvin.cs262.lab09;
 
-/** User Class
- * Sets up user class for User Table
- * A User is defined by a userID, emailID, password, lastName and firstName
+/** Person Class
+ * Sets up person class for Person Table
+ * A Person is defined by a personID, emailID, password, lastName and firstName
  * Primitive getters and setters defined for each instance variable
  */
-public class User {
-    private int userId;
+public class Person {
+    private int personId;
     private String password; //encrypt
     private String lastName;
     private String firstName;
     private String email;
 
-    public User(int userId, String emailId, String password, String lastName, String firstName) {
-        this.userId = userId;
+    public Person(int personId, String emailId, String password, String lastName, String firstName) {
+        this.personId = personId;
         this.password = password;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -21,9 +21,9 @@ public class User {
     }
 
 
-    public int getUserId() { return userId; }
+    public int getPersonId() { return personId; }
 
-    public void setUserId(int newUserId) {this.userId = newUserId;}
+    public void setPersonId(int newPersonId) {this.personId = newPersonId;}
 
     public String getPassword() { return password; }
 
