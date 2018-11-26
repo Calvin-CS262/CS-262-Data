@@ -214,7 +214,7 @@ public class PersonResource {
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT MAX(ID) FROM Uerson");
+            resultSet = statement.executeQuery("SELECT MAX(ID) FROM Person");
             if (resultSet.next()) {
                 person.setPersonId(resultSet.getInt(1) + 1);
             } else {
