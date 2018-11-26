@@ -282,7 +282,7 @@ public class PersonResource {
      */
     private void updatePerson(Person person, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("UPDATE Person SET email=%s, password=%s, lastName=%s, firstName=%s WHERE personId=%d",
+                String.format("UPDATE Person SET email='%s', password='%s', lastName='%s', firstName='%s' WHERE personId=%d",
                         person.getEmail(),
                         person.getPassword(),
                         getValueStringOrNull(person.getLastName()),
@@ -297,7 +297,7 @@ public class PersonResource {
      */
     private void insertPerson(Person person, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("INSERT INTO Person VALUES (%d, %s, %s, %s, %s)",
+                String.format("INSERT INTO Person VALUES (%d, '%s', '%s', '%s', '%s')",
                         person.getPersonId(),
                         person.getEmail(),
                         person.getPassword(),
