@@ -98,7 +98,8 @@ public class PassengerResource {
             while (resultSet.next()) {
                 Passenger p = new Passenger(
                         Integer.parseInt(resultSet.getString(1)),
-                        Integer.parseInt(resultSet.getString(2))
+                        Integer.parseInt(resultSet.getString(2)),
+                        Integer.parseInt(resultSet.getString(3))
                 );
                 result.add(p);
             }
