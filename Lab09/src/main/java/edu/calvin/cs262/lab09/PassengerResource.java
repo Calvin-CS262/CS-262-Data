@@ -120,7 +120,7 @@ public class PassengerResource {
      * @return if the passenger exists, a JSON-formatted passenger record, otherwise an invalid/empty JSON entity
      * @throws SQLException
      */
-    @ApiMethod(path="passenger/{rideID}/{userId}", httpMethod=GET)
+    @ApiMethod(path="passenger/{rideId}/{userId}", httpMethod=GET)
     public Passenger getPassenger(@Named("userId") int uId, @Named("rideId") int rId) throws SQLException {
         Connection connection = null;
         Statement statement = null;
@@ -236,7 +236,7 @@ public class PassengerResource {
      * @return the deleted passenger, if any
      * @throws SQLException
      */
-    @ApiMethod(path="passenger/{rideID}/{userId}", httpMethod=DELETE)
+    @ApiMethod(path="passenger/{rideId}/{userId}", httpMethod=DELETE)
     public void deletePassenger(@Named("userId") int uId, @Named("rideId") int rId) throws SQLException {
         Connection connection = null;
         Statement statement = null;
