@@ -2,8 +2,8 @@ package edu.calvin.cs262.lab09;
 
 public class Passenger {
 	private int id;
-	private int userID;
-	private int rideID;
+	private int personId;
+	private int rideId;
 
 	public Passenger(){
 		// The JSON marshaller used by Endpoints requires this default constructor.
@@ -11,8 +11,8 @@ public class Passenger {
 
 	public Passenger(int id, int trip, int person) {
 		this.id = id;
-		this.userID = person;
-		this.rideID = trip;
+		this.userId = person;
+		this.rideId = trip;
 	}
 
 	public int getID() {
@@ -24,10 +24,10 @@ public class Passenger {
 	}
 
 	public int getUser() {
-		return this.userID;
+		return this.userId;
 	}
 
 	public int getRide() {
-		return this.rideID;
+		return this.rideId;
 	}
 }

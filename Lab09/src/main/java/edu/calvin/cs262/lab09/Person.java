@@ -7,10 +7,10 @@ package edu.calvin.cs262.lab09;
  */
 public class Person {
     private int personId;
+    private String email;
     private String password; //encrypt
     private String lastName;
     private String firstName;
-    private String email;
 
     public Person() {
     // The JSON marshaller used by Endpoints requires this default constructor.
