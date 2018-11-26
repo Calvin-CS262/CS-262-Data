@@ -258,9 +258,9 @@ public class PassengerResource {
     /*
      * This function gets the user with the given id using the given JDBC statement.
      */
-    private ResultSet selectPassenger(int uId, int rId, Statement statement) throws SQLException {
+    private ResultSet selectPassenger(int id, Statement statement) throws SQLException {
         return statement.executeQuery(
-                String.format("SELECT * FROM Passenger WHERE userId=%d, rideId=%d", uId, rId)
+                String.format("SELECT * FROM Passenger WHERE id=%d", id)
         );
     }
 
@@ -294,7 +294,8 @@ public class PassengerResource {
      */
     private void insertPassenger(Passenger passenger, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("INSERT INTO Passenger VALUES (%d, %d)",
+                String.format("INSERT INTO Passenger VALUES (%d, %d, %d)",
+                        passenger.getID(),
                         passenger.getUser(),
                         passenger.getRide()
                 )
@@ -304,9 +305,9 @@ public class PassengerResource {
     /*
      * This function gets the passenger with the given id using the given JDBC statement.
      */
-    private void deletePassenger(int uId, int rId, Statement statement) throws SQLException {
+    private void deletePassenger(int id, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("DELETE FROM Passenger WHERE userId=%d, rideId=%d", uId, rId)
+                String.format("DELETE FROM Passenger WHERE id=%d", id)
         );
     }
 
