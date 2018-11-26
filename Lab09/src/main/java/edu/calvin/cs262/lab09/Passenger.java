@@ -24,7 +24,7 @@ public class Passenger {
 		this.id = id;
 	}
 
-	public int getUser() {
+	public int getPerson() {
 		return this.personId;
 	}
 

@@ -288,9 +288,9 @@ public class RideResource {
         statement.executeUpdate(
                 String.format("UPDATE Ride SET driver=%d, passengerLimit=%d, departure=%s, destination=%s, departureDateTime=%s WHERE id=%d",
                         ride.getDriver(),
-                        ride.getPassengerLimit(),
                         ride.getDeparture(),
                         ride.getDestination(),
+                        ride.getPassengerLimit(),
                         ride.getDateTime(),
                         ride.getRideId()
                 )
@@ -305,9 +305,9 @@ public class RideResource {
                 String.format("INSERT INTO Ride VALUES (%d, %s, %s, %s, %s)",
                         ride.getRideId(),
                         ride.getDriver(),
-                        ride.getPassengerLimit(),
                         ride.getDeparture(),
                         ride.getDestination(),
+                        ride.getPassengerLimit(),
                         ride.getDateTime()
                 )
         );

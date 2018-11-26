@@ -297,8 +297,8 @@ public class PassengerResource {
         statement.executeUpdate(
                 String.format("INSERT INTO Passenger VALUES (%d, %d, %d)",
                         passenger.getID(),
-                        passenger.getUser(),
-                        passenger.getRide()
+                        passenger.getRide(),
+                        passenger.getPerson()
                 )
         );
     }
