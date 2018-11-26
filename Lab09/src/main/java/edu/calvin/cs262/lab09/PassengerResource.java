@@ -85,7 +85,7 @@ public class PassengerResource {
      * @return JSON-formatted list of passenger records (based on a root JSON tag of "items")
      * @throws SQLException
      */
-    @ApiMethod(path="passenger", httpMethod=GET)
+    @ApiMethod(path="passengers", httpMethod=GET)
     public List<Passenger> getPassengers() throws SQLException {
         Connection connection = null;
         Statement statement = null;
