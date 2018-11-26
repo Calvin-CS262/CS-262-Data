@@ -299,10 +299,10 @@ public class PersonResource {
         statement.executeUpdate(
                 String.format("INSERT INTO Person VALUES (%d, %s, %s, %s, %s)",
                         person.getPersonId(),
+                        person.getEmail(),
                         person.getPassword(),
                         getValueStringOrNull(person.getLastName()),
-                        getValueStringOrNull(person.getFirstName()),
-                        person.getEmail()
+                        getValueStringOrNull(person.getFirstName())
                 )
         );
     }
