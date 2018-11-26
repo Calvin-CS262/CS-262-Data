@@ -30,7 +30,7 @@ CREATE TABLE Ride (
 	departure text,
 	destination text,
 	departureDateTime text,
-	status text
+	status text	--false means upcoming ride, true means past ride
 	);
 
 CREATE TABLE Passenger (
@@ -45,6 +45,11 @@ GRANT SELECT ON Passenger TO PUBLIC;
 -- Sample data
 INSERT INTO "User" VALUES (1, 'lhs3', 'abc123', 'steffen', 'luke');
 INSERT INTO "User" VALUES (2, 'abc1', 'abc456', 'def', 'abc');
+INSERT INTO "User" VALUES (3, 'neg6', 'abc789', 'Gamble', 'Nate');
+INSERT INTO Ride VALUES (1, 1, 4, 'Calvin College', 'Denmark', '2018-11-30 12:00:00PM', 'false');
+INSERT INTO Ride VALUES (2, 2, 4, 'Calvin College', 'Chicago', '2018-10-30 12:00:00PM', 'true');
+INSERT INTO Passenger VALUES (2, 1);
+INSERT INTO Passenger VALUES (2, 3);
 
 
 -- Sample queries

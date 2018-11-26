@@ -26,7 +26,7 @@ import static com.google.api.server.spi.config.ApiMethod.HttpMethod.DELETE;
  */
 @Api(
         name = "caluber",
-        version = "v2",
+        version = "v1",
         namespace =
         @ApiNamespace(
                 ownerDomain = "lab09.cs262.calvin.edu",
