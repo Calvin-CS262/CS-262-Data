@@ -301,7 +301,7 @@ public class PersonResource {
                         person.getPersonId(),
                         person.getEmail(),
                         person.getPassword(),
-                        person.getLastName()),
+                        person.getLastName(),
                         person.getFirstName()
                 )
         );
