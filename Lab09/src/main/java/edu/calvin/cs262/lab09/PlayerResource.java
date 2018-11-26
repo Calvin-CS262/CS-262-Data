@@ -24,7 +24,7 @@ import static com.google.api.server.spi.config.ApiMethod.HttpMethod.DELETE;
  * You should configure the name and namespace appropriately.
  */
 @Api(
-        name = "monopoly",
+        name = "caluber",
         version = "v1",
         namespace =
         @ApiNamespace(
