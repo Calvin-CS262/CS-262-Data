@@ -286,7 +286,7 @@ public class RideResource {
      */
     private void updateRide(Ride ride, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("UPDATE Ride SET driver=%d, passengerLimit=%d, departure='%s', destination='%s', departureDateTime='%s' WHERE id=%d",
+                String.format("UPDATE Ride SET driverId=%d, passengerLimit=%d, departure='%s', destination='%s', departureDateTime='%s' WHERE rideId=%d",
                         ride.getDriver(),
                         ride.getDeparture(),
                         ride.getDestination(),

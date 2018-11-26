@@ -141,8 +141,10 @@ Helpful commands for deploying the database:
 -gcloud endpoints services deploy target/openapi-docs/openapi.json
 -mvn appengine:deploy
 -wait about a minute
+
 Connecting to psql database:mvn 
 -gcloud sql connect calvincs262-fall2018-caluber --user=postgres --quiet
 
+Handy Curl requests
 -curl --request GET https://caluber-221319.appspot.com/caluber/v1/____ --> either players or player/1
 -curl --request POST --header "Content-Type: application/json" --data '{<insert Data here>}' https://caluber-221319.appspot.com/caluber/v1/____ --> player
