@@ -121,12 +121,12 @@ public class RideResource {
      * GET
      * This method gets the ride from the Ride table with the given ID.
      *
-     * @param id the ID of the requested ride
+     * @param rideId the ID of the requested ride
      * @return if the ride exists, a JSON-formatted ride record, otherwise an invalid/empty JSON entity
      * @throws SQLException
      */
-    @ApiMethod(path="ride/{id}", httpMethod=GET)
-    public Ride getRide(@Named("id") int id) throws SQLException {
+    @ApiMethod(path="ride/{rideId}", httpMethod=GET)
+    public Ride getRide(@Named("rideId") int rideId) throws SQLException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -134,7 +134,7 @@ public class RideResource {
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            resultSet = selectRide(id, statement);
+            resultSet = selectRide(rideId, statement);
             if (resultSet.next()) {
                 result = new Ride(
                         Integer.parseInt(resultSet.getString(1)),
@@ -165,21 +165,21 @@ public class RideResource {
      * times is the same as running it exactly once.
      * Any ride ID value set in the passed ride data is ignored.
      *
-     * @param id     the ID for the ride, assumed to be unique
-     * @param ride a JSON representation of the ride; The id parameter overrides any id specified here.
+     * @param rideId     the ID for the ride, assumed to be unique
+     * @param ride a JSON representation of the ride; The rideId parameter overrides any rideId specified here.
      * @return new/updated ride entity
      * @throws SQLException
      */
-    @ApiMethod(path="ride/{id}", httpMethod=PUT)
-    public Ride putRide(Ride ride, @Named("id") int id) throws SQLException {
+    @ApiMethod(path="ride/{rideId}", httpMethod=PUT)
+    public Ride putRide(Ride ride, @Named("rideId") int rideId) throws SQLException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            ride.setRideId(id);
-            resultSet = selectRide(id, statement);
+            ride.setRideId(rideId);
+            resultSet = selectRide(rideId, statement);
             if (resultSet.next()) {
                 updateRide(ride, statement);
             } else {
@@ -241,18 +241,18 @@ public class RideResource {
      * If the ride with the given ID doesn't exist, SQL won't delete anything.
      * This makes DELETE idempotent.
      *
-     * @param id     the ID for the ride, assumed to be unique
+     * @param rideId     the ID for the ride, assumed to be unique
      * @return the deleted ride, if any
      * @throws SQLException
      */
-    @ApiMethod(path="ride/{id}", httpMethod=DELETE)
-    public void deleteRide(@Named("id") int id) throws SQLException {
+    @ApiMethod(path="ride/{rideId}", httpMethod=DELETE)
+    public void deleteRide(@Named("rideId") int rideId) throws SQLException {
         Connection connection = null;
         Statement statement = null;
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            deleteRide(id, statement);
+            deleteRide(rideId, statement);
         } catch (SQLException e) {
             throw (e);
         } finally {
@@ -264,16 +264,16 @@ public class RideResource {
     /** SQL Utility Functions *********************************************/
 
     /*
-     * This function gets the ride with the given id using the given JDBC statement.
+     * This function gets the ride with the given rideId using the given JDBC statement.
      */
-    private ResultSet selectRide(int id, Statement statement) throws SQLException {
+    private ResultSet selectRide(int rideId, Statement statement) throws SQLException {
         return statement.executeQuery(
-                String.format("SELECT * FROM Ride WHERE rideId=%d", id)
+                String.format("SELECT * FROM Ride WHERE rideId=%d", rideId)
         );
     }
 
     /*
-     * This function gets the ride with the given id using the given JDBC statement.
+     * This function gets the ride with the given rideId using the given JDBC statement.
      */
     private ResultSet selectRides(Statement statement) throws SQLException {
         return statement.executeQuery(
@@ -316,11 +316,11 @@ public class RideResource {
     }
 
     /*
-     * This function gets the ride with the given id using the given JDBC statement.
+     * This function gets the ride with the given rideId using the given JDBC statement.
      */
-    private void deleteRide(int id, Statement statement) throws SQLException {
+    private void deleteRide(int rideId, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("DELETE FROM Ride WHERE rideId=%d", id)
+                String.format("DELETE FROM Ride WHERE rideId=%d", rideId)
         );
     }
 
