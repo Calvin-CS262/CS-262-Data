@@ -6,7 +6,7 @@ public class Passenger {
 	private int rideID;
 
 	public Passenger(){
-
+		// The JSON marshaller used by Endpoints requires this default constructor.
 	}
 
 	public Passenger(int id, int trip, int person) {

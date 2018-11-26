@@ -15,7 +15,9 @@ public class Ride {
     private Instant dateTime;
     private Boolean status;
 
-
+    public Ride() {
+        // The JSON marshaller used by Endpoints requires this default constructor.
+    }
     // Constructor
     public Ride(int rideId, int driverId, int passengerLimit, String  departure,
                  String destination, String dateTime, Boolean status) {

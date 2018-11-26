@@ -12,6 +12,10 @@ public class Person {
     private String firstName;
     private String email;
 
+    public Person() {
+    // The JSON marshaller used by Endpoints requires this default constructor.
+    }
+
     public Person(int personId, String emailId, String password, String lastName, String firstName) {
         this.personId = personId;
         this.password = password;
