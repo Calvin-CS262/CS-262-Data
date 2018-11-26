@@ -94,7 +94,7 @@ public class PersonResource {
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            resultSet = selectUersons(statement);
+            resultSet = selectPersons(statement);
             while (resultSet.next()) {
                 Person p = new Person(
                         Integer.parseInt(resultSet.getString(1)),
@@ -132,7 +132,7 @@ public class PersonResource {
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            resultSet = selectUerson(id, statement);
+            resultSet = selectPerson(id, statement);
             if (resultSet.next()) {
                 result = new Person(
                         Integer.parseInt(resultSet.getString(1)),
@@ -174,12 +174,12 @@ public class PersonResource {
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            person.setUersonId(id);
-            resultSet = selectUerson(id, statement);
+            person.setPersonId(id);
+            resultSet = selectPerson(id, statement);
             if (resultSet.next()) {
-                updateUerson(person, statement);
+                updatePerson(person, statement);
             } else {
-                insertUerson(person, statement);
+                insertPerson(person, statement);
             }
         } catch (SQLException e) {
             throw (e);
@@ -216,11 +216,11 @@ public class PersonResource {
             statement = connection.createStatement();
             resultSet = statement.executeQuery("SELECT MAX(ID) FROM Uerson");
             if (resultSet.next()) {
-                person.setUersonId(resultSet.getInt(1) + 1);
+                person.setPersonId(resultSet.getInt(1) + 1);
             } else {
                 throw new RuntimeException("failed to find unique ID...");
             }
-            insertUerson(person, statement);
+            insertPerson(person, statement);
         } catch (SQLException e) {
             throw (e);
         } finally {
@@ -248,7 +248,7 @@ public class PersonResource {
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            deleteUerson(id, statement);
+            deletePerson(id, statement);
         } catch (SQLException e) {
             throw (e);
         } finally {
