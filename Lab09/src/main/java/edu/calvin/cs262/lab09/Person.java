@@ -43,6 +43,6 @@ public class Person {
 
     public String getEmail() { return email; }
 
-    public void setEmail(String newEmail) { this.email = newEmail; }
+    public void setEmail(String newEmail) { this.email = newEmail + "@students.calvin.edu"; }
 
 }

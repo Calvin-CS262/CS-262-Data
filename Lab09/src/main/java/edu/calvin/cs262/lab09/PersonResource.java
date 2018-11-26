@@ -301,8 +301,8 @@ public class PersonResource {
                         person.getPersonId(),
                         person.getEmail(),
                         person.getPassword(),
-                        getValueStringOrNull(person.getLastName()),
-                        getValueStringOrNull(person.getFirstName())
+                        person.getLastName()),
+                        person.getFirstName()
                 )
         );
     }
