@@ -1,6 +1,7 @@
 -- This script builds a basic database for the CalUber app
 -- 
 -- @author Luke Steffen (lhs3)
+-- @author Nate Gamble (neg6)
 -- Created on 10/23/2018
 
 -- Drop tables if they exist
