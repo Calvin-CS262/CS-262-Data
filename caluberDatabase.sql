@@ -71,3 +71,10 @@ SELECT Ride.id, driver, passengerId
 FROM Ride INNER JOIN Passenger
 ON Ride.id = Passenger.rideId;
 
+
+-- curl --request POST --header "Content-Type: application/json" \
+-- --data '{"password":"abc012","lName":"Jonas","fName":"Micah","studentId":"ocd3"}' \
+-- https://caluber-221319.appspot.com/caluber/v1/person
+
+-- curl --request POST --header "Content-Type: application/json" \
+-- --data '{"passengerId":"3","rideId":"1"}' https://caluber-221319.appspot.com/caluber/v1/passenger
