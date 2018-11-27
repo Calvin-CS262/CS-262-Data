@@ -13,22 +13,22 @@ public class Ride {
     private String destination;
     private int passengerLimit;
     private Instant departureDateTime;
-    private boolean status;
+    // private boolean status;
 
     public Ride() {
         // The JSON marshaller used by Endpoints requires this default constructor.
     }
     // Constructor
     public Ride(int rideId, int driverId, String  departure, String destination,
-                int passengerLimit, String dateTime, String status) {
-        this.rideId = rideId;
+                int passengerLimit, String dateTime) {  //String status
+        this.rideId = rideId;   
         this.driverId = driverId;
         this.departure = departure;
         this.destination = destination;
         this.passengerLimit = passengerLimit;
         this.departureDateTime = Instant.parse(dateTime);
         this.status = Boolean.parseBoolean(status);
-        this.status = this.departureDateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
+        // this.status = this.departureDateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
 
     }
 
@@ -68,13 +68,13 @@ public class Ride {
 
     public void setDateTime(String dateTime) { this.departureDateTime = Instant.parse(dateTime); }
 
-    public String getStatus() {
-        status = departureDateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
-        return Boolean.toString(status);
-    }
+    // public String getStatus() {
+    //     status = departureDateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
+    //     return Boolean.toString(status);
+    // }
 
-    public void setStatus(String status) {
-        this.status = departureDateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
-    }
+    // public void setStatus(String status) {
+    //     this.status = departureDateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
+    // }
     
 }
