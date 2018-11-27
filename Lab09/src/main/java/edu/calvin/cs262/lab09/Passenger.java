@@ -16,19 +16,27 @@ public class Passenger {
 		this.personId = personId;
 	}
 
-	public int getID() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setID(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public int getPerson() {
+	public int getPersonId() {
 		return this.personId;
 	}
 
-	public int getRide() {
+	public void setPersonId(int personId) {
+		this.personId = personId;
+	}
+
+	public int getRideId() {
 		return this.rideId;
+	}
+
+	public void setRideId(int rideId) {
+		this.rideId = rideId;
 	}
 }

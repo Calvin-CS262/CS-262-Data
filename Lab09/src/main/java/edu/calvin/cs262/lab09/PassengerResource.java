@@ -211,7 +211,7 @@ public class PassengerResource {
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT MAX(ID) FROM Passenger");
+            resultSet = statement.executeQuery("SELECT MAX(id) FROM Passenger");
             if (resultSet.next()) {
                 passenger.setID(resultSet.getInt(1) + 1);
             } else {
@@ -296,9 +296,9 @@ public class PassengerResource {
     private void insertPassenger(Passenger passenger, Statement statement) throws SQLException {
         statement.executeUpdate(
                 String.format("INSERT INTO Passenger VALUES (%d, %d, %d)",
-                        passenger.getID(),
-                        passenger.getRide(),
-                        passenger.getPerson()
+                        passenger.getId(),
+                        passenger.getRideId(),
+                        passenger.getPersonId()
                 )
         );
     }

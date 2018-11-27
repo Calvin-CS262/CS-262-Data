@@ -72,5 +72,9 @@ public class Ride {
         status = departureDateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
         return Boolean.toString(status);
     }
+
+    public void setStatus(String status) {
+        status = departureDateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
+    }
     
 }
