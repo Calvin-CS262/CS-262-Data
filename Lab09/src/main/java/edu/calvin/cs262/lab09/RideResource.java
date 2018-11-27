@@ -288,11 +288,11 @@ public class RideResource {
     private void updateRide(Ride ride, Statement statement) throws SQLException {
         statement.executeUpdate(
                 String.format("UPDATE Ride SET driverId=%d, departure='%s', destination='%s', passengerLimit=%d, departureDateTime='%s' WHERE rideId=%d",
-                        ride.getDriver(),
+                        ride.getDriverId(),
                         ride.getDeparture(),
                         ride.getDestination(),
                         ride.getPassengerLimit(),
-                        ride.getDateTime(),
+                        ride.getdestinationDateTime(),
                         // ride.getStatus(),
                         ride.getRideId()
                 )
@@ -306,11 +306,11 @@ public class RideResource {
         statement.executeUpdate(
                 String.format("INSERT INTO Ride VALUES (%d, %d, '%s', '%s', %d, '%s')",
                         ride.getRideId(),
-                        ride.getDriver(),
+                        ride.getDriverId(),
                         ride.getDeparture(),
                         ride.getDestination(),
                         ride.getPassengerLimit(),
-                        ride.getDateTime()
+                        ride.getdepartureDateTime()
                         // ride.getStatus()
                 )
         );

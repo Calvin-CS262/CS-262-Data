@@ -36,9 +36,9 @@ public class Ride {
 
     public void setRideId(int rideId) { this.rideId = rideId; }
 
-    public int getDriver() { return driverId; }
+    public int getDriverId() { return driverId; }
 
-    public void setDriver(int driverId) {
+    public void setDriverId(int driverId) {
         this.driverId = driverId;
     }
 
@@ -64,9 +64,9 @@ public class Ride {
         this.passengerLimit = passengerLimit;
     }
 
-    public String getDateTime() { return departureDateTime.toString(); }
+    public String getdepartureDateTime() { return departureDateTime.toString(); }
 
-    public void setDateTime(String dateTime) { this.departureDateTime = Instant.parse(dateTime); }
+    public void setdepartureDateTime(String dateTime) { this.departureDateTime = Instant.parse(dateTime); }
 
     // public String getStatus() {
     //     status = departureDateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
