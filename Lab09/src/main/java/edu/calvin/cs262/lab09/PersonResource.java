@@ -119,12 +119,12 @@ public class PersonResource {
      * GET
      * This method gets the person from the Person table with the given ID.
      *
-     * @param id the ID of the requested person
+     * @param personId the ID of the requested person
      * @return if the person exists, a JSON-formatted person record, otherwise an invalid/empty JSON entity
      * @throws SQLException
      */
-    @ApiMethod(path="person/{id}", httpMethod=GET)
-    public Person getPerson(@Named("id") int id) throws SQLException {
+    @ApiMethod(path="person/{personId}", httpMethod=GET)
+    public Person getPerson(@Named("personId") int personId) throws SQLException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -132,7 +132,7 @@ public class PersonResource {
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            resultSet = selectPerson(id, statement);
+            resultSet = selectPerson(personId, statement);
             if (resultSet.next()) {
                 result = new Person(
                         Integer.parseInt(resultSet.getString(1)),
@@ -161,21 +161,21 @@ public class PersonResource {
      * times is the same as running it exactly once.
      * Any person ID value set in the passed person data is ignored.
      *
-     * @param id     the ID for the person, assumed to be unique
+     * @param personId     the ID for the person, assumed to be unique
      * @param person a JSON representation of the person; The id parameter overrides any id specified here.
      * @return new/updated person entity
      * @throws SQLException
      */
-    @ApiMethod(path="person/{id}", httpMethod=PUT)
-    public Person putPerson(Person person, @Named("id") int id) throws SQLException {
+    @ApiMethod(path="person/{personId}", httpMethod=PUT)
+    public Person putPerson(Person person, @Named("personId") int personId) throws SQLException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            person.setPersonId(id);
-            resultSet = selectPerson(id, statement);
+            person.setPersonId(personId);
+            resultSet = selectPerson(personId, statement);
             if (resultSet.next()) {
                 updatePerson(person, statement);
             } else {
@@ -214,7 +214,7 @@ public class PersonResource {
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT MAX(ID) FROM Person");
+            resultSet = statement.executeQuery("SELECT MAX(personId) FROM Person");
             if (resultSet.next()) {
                 person.setPersonId(resultSet.getInt(1) + 1);
             } else {
@@ -237,18 +237,18 @@ public class PersonResource {
      * If the person with the given ID doesn't exist, SQL won't delete anything.
      * This makes DELETE idempotent.
      *
-     * @param id     the ID for the person, assumed to be unique
+     * @param personId     the ID for the person, assumed to be unique
      * @return the deleted person, if any
      * @throws SQLException
      */
-    @ApiMethod(path="person/{id}", httpMethod=DELETE)
-    public void deletePerson(@Named("id") int id) throws SQLException {
+    @ApiMethod(path="person/{personId}", httpMethod=DELETE)
+    public void deletePerson(@Named("personId") int personId) throws SQLException {
         Connection connection = null;
         Statement statement = null;
         try {
             connection = DriverManager.getConnection(System.getProperty("cloudsql"));
             statement = connection.createStatement();
-            deletePerson(id, statement);
+            deletePerson(personId, statement);
         } catch (SQLException e) {
             throw (e);
         } finally {
@@ -260,16 +260,16 @@ public class PersonResource {
     /** SQL Utility Functions *********************************************/
 
     /*
-     * This function gets the person with the given id using the given JDBC statement.
+     * This function gets the person with the given personId using the given JDBC statement.
      */
-    private ResultSet selectPerson(int id, Statement statement) throws SQLException {
+    private ResultSet selectPerson(int personId, Statement statement) throws SQLException {
         return statement.executeQuery(
-                String.format("SELECT * FROM Person WHERE id=%d", id)
+                String.format("SELECT * FROM Person WHERE personId=%d", personId)
         );
     }
 
     /*
-     * This function gets the person with the given id using the given JDBC statement.
+     * This function gets the person with the given personId using the given JDBC statement.
      */
     private ResultSet selectPersons(Statement statement) throws SQLException {
         return statement.executeQuery(
@@ -308,11 +308,11 @@ public class PersonResource {
     }
 
     /*
-     * This function gets the person with the given id using the given JDBC statement.
+     * This function gets the person with the given personId using the given JDBC statement.
      */
-    private void deletePerson(int id, Statement statement) throws SQLException {
+    private void deletePerson(int personId, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("DELETE FROM Person WHERE id=%d", id)
+                String.format("DELETE FROM Person WHERE personId=%d", personId)
         );
     }
 
