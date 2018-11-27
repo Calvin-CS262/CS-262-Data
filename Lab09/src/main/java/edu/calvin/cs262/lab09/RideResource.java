@@ -98,7 +98,7 @@ public class RideResource {
             while (resultSet.next()) {
                 Ride r = new Ride(
                         Integer.parseInt(resultSet.getString(1)),
-                        Integer.parseInt(resultSet.getString(2)),
+                        Integer.parseInteger(resultSet.getString(2)),
                         resultSet.getString(3),
                         resultSet.getString(4),
                         Integer.parseInt(resultSet.getString(5)),

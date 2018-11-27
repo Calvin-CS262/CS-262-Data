@@ -8,7 +8,7 @@ import java.time.Instant;
 public class Ride {
 
     private int rideId; //Primary Key
-    private int driverId; //Foreign Key
+    private Integer driverId; //Foreign Key
     private String departure;
     private String destination;
     private int passengerLimit;
