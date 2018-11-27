@@ -292,7 +292,7 @@ public class RideResource {
                         ride.getDeparture(),
                         ride.getDestination(),
                         ride.getPassengerLimit(),
-                        ride.getDestinationDateTime(),
+                        ride.getDepartureDateTime(),
                         // ride.getStatus(),
                         ride.getRideId()
                 )
