@@ -64,9 +64,9 @@ public class Ride {
         this.passengerLimit = passengerLimit;
     }
 
-    public String getdepartureDateTime() { return departureDateTime.toString(); }
+    public String getDepartureDateTime() { return departureDateTime.toString(); }
 
-    public void setdepartureDateTime(String dateTime) { this.departureDateTime = Instant.parse(dateTime); }
+    public void setDepartureDateTime(String dateTime) { this.departureDateTime = Instant.parse(dateTime); }
 
     // public String getStatus() {
     //     status = departureDateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
