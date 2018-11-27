@@ -3,7 +3,7 @@ import java.time.Instant;
 
 /** Ride Class
  * Sets up class for the Ride Table
- * A Ride includes a rideID, a driverId (a User), departure time, destination, passenger limit, date, time and status
+ * A Ride includes a rideID, a driverId (a Person), departure time, destination, passenger limit, date, time and status
  */
 public class Ride {
 

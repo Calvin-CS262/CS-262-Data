@@ -37,7 +37,7 @@ CREATE TABLE Ride (
 CREATE TABLE Passenger (
 	id integer PRIMARY KEY,
 	rideId integer REFERENCES Ride(rideId),
-	personId integer REFERENCES Person(id)
+	personId integer REFERENCES Person(personId)
 	);
 
 GRANT SELECT ON Person TO PUBLIC;
@@ -67,15 +67,6 @@ WHERE status = 'false';	--false means upcoming ride, true means past ride
 SELECT CONCAT (firstName, ' ', lastName)
 FROM Person;
 
-SELECT Ride.rideId, driverId, driverId
+SELECT Ride.rideId, driverId, personId
 FROM Ride INNER JOIN Passenger
 ON Ride.rideId = Passenger.rideId;
-
-
--- curl --request POST --header "Content-Type: application/json" \
--- --data '{"password":"abc012","lName":"Jonas","fName":"Micah","studentId":"ocd3"}' \
--- https://caluber-221319.appspot.com/caluber/v1/person
-
--- curl --request POST --header "Content-Type: application/json" \
--- --data '{"passengerId":"3","rideId":"1"}' https://caluber-221319.appspot.com/caluber/v1/passenger
---curl --request POST --header "Content-Type: application/json" --data '{}' https://caluber-221319.appspot.com/caluber/v1/person

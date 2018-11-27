@@ -103,6 +103,7 @@ public class RideResource {
                         resultSet.getString(4),
                         Integer.parseInt(resultSet.getString(5)),
                         resultSet.getString(6),	//Need to make sure that datetime is stored in database as a string
+                        //driverId is showing up here insead of at second line for some reason
                         resultSet.getString(7)
                 );
                 result.add(r);
