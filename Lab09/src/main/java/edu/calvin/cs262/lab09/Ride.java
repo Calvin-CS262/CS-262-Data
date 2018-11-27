@@ -32,44 +32,44 @@ public class Ride {
 
     }
 
-    public int getRideId() { return this.rideId; }
+    public int getRideId() { return rideId; }
 
     public void setRideId(int rideId) { this.rideId = rideId; }
 
-    public int getDriver() { return this.driverId; }
+    public int getDriver() { return driverId; }
 
     public void setDriver(int driverId) {
         this.driverId = driverId;
     }
 
     public String getDeparture() {
-        return this.departure;
+        return departure;
     }
 
     public void setDeparture(String departure) {
         this.departure = departure;
     }
 
-    public String getDestination() { return this.destination; }
+    public String getDestination() { return destination; }
 
     public void setDestination(String destination) {
         this.destination = destination;
     }
 
     public int getPassengerLimit() {
-        return this.passengerLimit;
+        return passengerLimit;
     }
 
     public void setPassengerLimit(int passengerLimit) {
         this.passengerLimit = passengerLimit;
     }
 
-    public String getDateTime() { return this.departureDateTime.toString(); }
+    public String getDateTime() { return departureDateTime.toString(); }
 
     public void setDateTime(String dateTime) { this.departureDateTime = Instant.parse(dateTime); }
 
     public String getStatus() {
-        this.status = departureDateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
+        status = departureDateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
         return Boolean.toString(status);
     }
     
