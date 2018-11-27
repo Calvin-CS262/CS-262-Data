@@ -8,7 +8,7 @@ import java.time.Instant;
 public class Ride {
 
     private int rideId; //Primary Key
-    private Integer driverId; //Foreign Key
+    private int driverId; //Foreign Key
     private String departure;
     private String destination;
     private int passengerLimit;
@@ -19,7 +19,7 @@ public class Ride {
         // The JSON marshaller used by Endpoints requires this default constructor.
     }
     // Constructor
-    public Ride(int rideId, Integer driverId, String  departure, String destination,
+    public Ride(int rideId, int driverId, String  departure, String destination,
                 int passengerLimit, String dateTime, String status) {
         this.rideId = rideId;
         this.driverId = driverId;

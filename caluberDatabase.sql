@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS Person;
 -- USE CalUber;
 
 CREATE TABLE Person (
-	id integer PRIMARY KEY,
+	personId integer PRIMARY KEY,
 	email varchar(30),
 	password varchar(50),
 	lastName text,
@@ -26,7 +26,7 @@ CREATE TABLE Person (
 
 CREATE TABLE Ride (
 	rideId integer PRIMARY KEY,
-	driverId integer REFERENCES Person(id),
+	driverId integer REFERENCES Person(personId),
 	departure text,
 	destination text,
 	passengerLimit integer,
