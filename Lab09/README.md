@@ -142,7 +142,7 @@ Helpful commands for deploying the database:
 -mvn appengine:deploy
 -wait about a minute
 
-Connecting to psql database:mvn 
+Connecting to psql database:
 -gcloud sql connect calvincs262-fall2018-caluber --user=postgres --quiet
 
 Handy Curl requests
