@@ -10,10 +10,10 @@ public class Passenger {
 		// The JSON marshaller used by Endpoints requires this default constructor.
 	}
 
-	public Passenger(int id, int trip, int person) {
+	public Passenger(int id, int rideId, int personId) {
 		this.id = id;
-		this.personId = person;
-		this.rideId = trip;
+		this.rideId = rideId;
+		this.personId = personId;
 	}
 
 	public int getID() {
