@@ -282,7 +282,7 @@ public class PersonResource {
      */
     private void updatePerson(Person person, Statement statement) throws SQLException {
         statement.executeUpdate(
-                String.format("UPDATE Person SET email='%s', password='%s', lastName='%s', firstName='%s' WHERE id=%d",
+                String.format("UPDATE Person SET email='%s', password='%s', lastName='%s', firstName='%s' WHERE personId=%d",
                         person.getEmail(),
                         person.getPassword(),
                         getValueStringOrNull(person.getLastName()),
