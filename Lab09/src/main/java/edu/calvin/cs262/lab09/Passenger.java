@@ -2,8 +2,8 @@ package edu.calvin.cs262.lab09;
 
 public class Passenger {
 	private int id;
-	private int personId;
 	private int rideId;
+	private int personId;
 
 
 	public Passenger(){

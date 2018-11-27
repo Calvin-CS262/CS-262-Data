@@ -18,10 +18,10 @@ public class Person {
 
     public Person(int personId, String emailId, String password, String lastName, String firstName) {
         this.personId = personId;
+        this.email = emailId + "@students.calvin.edu";
         this.password = password;
         this.lastName = lastName;
         this.firstName = firstName;
-        this.email = emailId + "@students.calvin.edu";
     }
 
 
