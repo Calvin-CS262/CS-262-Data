@@ -20,7 +20,7 @@ public class Ride {
     }
     // Constructor
     public Ride(int rideId, int driverId, String  departure, String destination,
-                int passengerLimit, String dateTime, String status) {
+                int passengerLimit, String dateTime, boolean status) {
         this.rideId = rideId;
         this.driverId = driverId;
         this.departure = departure;
@@ -67,9 +67,9 @@ public class Ride {
 
     public void setDateTime(String dateTime) { this.departureDateTime = Instant.parse(dateTime); }
 
-    public String getStatus() {
+    public boolean getStatus() {
         this.status = departureDateTime.isAfter(Instant.now());  //true if ride has passed, false if ride is upcoming
-        return Boolean.toString(status);
+        return status;
     }
     
 }
