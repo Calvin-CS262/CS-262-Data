@@ -148,3 +148,5 @@ Connecting to psql database:mvn
 Handy Curl requests
 -curl --request GET https://caluber-221319.appspot.com/caluber/v1/____ --> either players or player/1
 -curl --request POST --header "Content-Type: application/json" --data '{<insert Data here>}' https://caluber-221319.appspot.com/caluber/v1/____ --> player
+-curl --request POST --header "Content-Type: application/json" --data '{"driverId":"1", "departure":"Calvin", "destination":"Moon", "passengerLimit":"4", "departureDateTime":"2018-10-12T12:00:00Z","status":"false"}' https://caluber-221319.appspot.com/caluber/v1/ride
+-curl --request PUT --header "Content-Type: application/json" --data '{"driverId":"1", "departure":"Calvin", "destination":"Moon", "passengerLimit":"4", "departureDateTime":"2018-10-12T12:00:00Z","status":"false"}' https://caluber-221319.appspot.com/caluber/v1/ride/3
