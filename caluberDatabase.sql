@@ -30,8 +30,7 @@ CREATE TABLE Ride (
 	departure text,
 	destination text,
 	passengerLimit integer,
-	departureDateTime text,
-	status text	--false means upcoming ride, true means past ride
+	departureDateTime text
 	);
 
 CREATE TABLE Passenger (
@@ -48,8 +47,9 @@ GRANT SELECT ON Passenger TO PUBLIC;
 INSERT INTO Person VALUES (1, 'lhs3', 'abc123', 'steffen', 'luke');
 INSERT INTO Person VALUES (2, 'abc1', 'abc456', 'def', 'abc');
 INSERT INTO Person VALUES (3, 'neg6', 'abc789', 'Gamble', 'Nate');
-INSERT INTO Ride VALUES (1, 1, 'Calvin College', 'Denmark', 4, '2018-11-30T10:00:00Z', 'false');
-INSERT INTO Ride VALUES (2, 2, 'Calvin College', 'Chicago', 4, '2018-10-30T15:00:00Z', 'true');
+INSERT INTO Ride VALUES (1, 1, 'Calvin College', 'Denmark', 4, '2018-11-30T10:00:00Z');
+INSERT INTO Ride VALUES (2, 2, 'Calvin College', 'Chicago', 4, '2018-10-30T15:00:00Z');
+INSERT INTO Ride VALUES (3, 3, 'Calvin College', 'Meijer', 3, '2018-12-18T15:00:00Z');
 INSERT INTO Passenger VALUES (1, 2, 1);
 INSERT INTO Passenger VALUES (2, 2, 3);
 
@@ -61,8 +61,7 @@ WHERE destination LIKE 'Chicago';
 SELECT CONCAT (email, '@students.calvin.edu')
 FROM Person;
 
-SELECT * FROM Ride
-WHERE status = 'false';	--false means upcoming ride, true means past ride
+SELECT * FROM Ride;
 
 SELECT CONCAT (firstName, ' ', lastName)
 FROM Person;
